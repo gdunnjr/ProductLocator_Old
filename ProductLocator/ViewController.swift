@@ -22,9 +22,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var latitude: Double = 37.7710347
     var longitude: Double = -122.4040795
     
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+   
         mapView.delegate = self
         
         // Get the current location
@@ -83,11 +86,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
+    
     func getStores()
     {
         if droppingPins {
             return
         }
+        
+        activityIndicator.frame = CGRectMake(100, 100, 100, 100);
+        activityIndicator.startAnimating()
+        activityIndicator.center = self.view.center
+        self.view.addSubview( activityIndicator )
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
@@ -165,7 +174,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         }
                     }
                 }
-   
+                self.activityIndicator.stopAnimating()
       
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
@@ -173,6 +182,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         })
 
         droppingPins = false
+
 
     }
 
@@ -228,6 +238,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     self.mapView.addAnnotation(annotation)
                     
                 }
+
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
