@@ -16,6 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
     var foundUserLocation = false
+    var droppingPins = false
 
     // these will hold current location, set some defaults justin case
     var latitude: Double = 37.7710347
@@ -84,6 +85,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func getStores()
     {
+        if droppingPins {
+            return
+        }
+        
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
         let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=jet&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=198&radiusInMiles=15&premiseTypeDesc=OFF%20PREMISE&from=0&to=50"
@@ -101,6 +106,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 var storeName = ""
                 var storeAddress = ""
                 var storeState = ""
+                var storeCity = ""
                 var storeZip = ""
                 var storePhone = ""
                 var storeLat : Double = 0.00
@@ -110,7 +116,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 var currentStore : String = ""
                 
                 if let productLocation = responseObject as? NSDictionary {
-                    println("here I am")
+                   
                     if let prodLocs = productLocation["productLocation"] as? NSArray {
           
                         if prodLocs.count == 0
@@ -126,10 +132,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                                     //println((prodLocs[index]["latitude"]) as Float)
                                     //println((prodLocs[index]["longitude"]) as Float)
                                 
-                                    if let storeName = prodLocs[index]["storeName"] as? Double {
+                                    if let tmpStoreName = prodLocs[index]["storeName"] as? String {
+                                        storeName = tmpStoreName
                                     }
                                     
-                                    if let storeAddress = prodLocs[index]["storeAddress"] as? Double {
+                                    if let tmpStoreAddress = prodLocs[index]["addr01Dsc"] as? String {
+                                        storeAddress = tmpStoreAddress
+                                    }
+                                    
+                                    if let tmpStoreCity = prodLocs[index]["cityDsc"] as? String {
+                                        storeCity = tmpStoreCity
                                     }
                                     
                                     if let tmpStoreLat = prodLocs[index]["latitude"] as? Double {
@@ -143,8 +155,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                                     let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
                                     annotation.setCoordinate(coordinate)
                                     annotation.title = storeName
-                                    annotation.subtitle = storeAddress
-                                    self.annotations.append(annotation)
+                                    annotation.subtitle = storeAddress + " " + storeCity
+                                    //self.annotations.append(annotation)
                                     self.mapView.addAnnotation(annotation)
                                     
                                 }
@@ -160,12 +172,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 println("Error: " + error.localizedDescription)
         })
 
+        droppingPins = false
 
-        // read store from the heroku endpoint
     }
 
     func getStore()
     {
+        
         let manager = AFHTTPRequestOperationManager()
         
         let storeEndpointURL = "https://cbi-api-test.herokuapp.com/v2/stores/5110665?apiKey=1&signature=Ydz7LTPUq2gVAE/WobrHnpSLNh1WtyVfcWOHu3exR3w="
@@ -211,7 +224,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     annotation.setCoordinate(coordinate)
                     annotation.title = storeName
                     annotation.subtitle = storeAddress
-                    self.annotations.append(annotation)
+                    //self.annotations.append(annotation)
                     self.mapView.addAnnotation(annotation)
                     
                 }
@@ -253,15 +266,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             let center = self.location.coordinate
             
-            let span = MKCoordinateSpanMake(0.8, 0.8)
+            let span = MKCoordinateSpanMake(0.5, 0.5)
             self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
             
             self.latitude = center.latitude
+            
             self.longitude = center.longitude
-            // code to show users location with a blue dot
-            //mapView.showsUserLocation = true
+            
             foundUserLocation = true
-            //centerMapByMiles(25)
+            
+            // this is crashing
+            //centerMapByMiles(15)
             
         }
     }
@@ -277,7 +292,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-
+    
     func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
         
         if !foundUserLocation {
@@ -314,6 +329,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         */
     }
  
+    
     func centerMapByMiles(miles: Double) {
         var location = mapView.centerCoordinate
         var span = MKCoordinateSpanMake(0.1, 0.1)
