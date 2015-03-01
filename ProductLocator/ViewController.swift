@@ -60,7 +60,114 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         
+        //getStore()
+        //getStores()
+        
+        // Code to add array of annotation map pins
+        //self.mapView.addAnnotations(self.annotations)
+        
+        
+        /* Code to drop map pins
+        self.annotations = []
+        for business in results {
+        let annotation = MKPointAnnotation()
+        let coordinate = CLLocationCoordinate2D(latitude: business.latitude!, longitude: business.longitude!)
+        annotation.setCoordinate(coordinate)
+        annotation.title = business.name
+        annotation.subtitle = business.displayCategories
+        self.annotations.append(annotation)
+        }
+        self.mapView.addAnnotations(self.annotations)
+        */
+        
+    }
+    
+    func getStores()
+    {
+        let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
+        
+        let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=jet&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=198&radiusInMiles=15&premiseTypeDesc=OFF%20PREMISE&from=0&to=50"
+        
+        println(self.latitude)
+        println(self.longitude)
+        
+        
         let manager = AFHTTPRequestOperationManager()
+        manager.GET( baseURL,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                //println("JSON: " + String(responseObject.description))
+                
+                var storeName = ""
+                var storeAddress = ""
+                var storeState = ""
+                var storeZip = ""
+                var storePhone = ""
+                var storeLat : Double = 0.00
+                var storeLng : Double = 0.00
+                
+                var lastStore : String = ""
+                var currentStore : String = ""
+                
+                if let productLocation = responseObject as? NSDictionary {
+                    println("here I am")
+                    if let prodLocs = productLocation["productLocation"] as? NSArray {
+          
+                        if prodLocs.count == 0
+                        {
+                            println("no locs")
+                        }
+                        else
+                        {
+                            for index in 0...prodLocs.count-1 {
+                                let currentStore = ((prodLocs[index]["storeName"]) as String)
+                                if (currentStore != lastStore) {
+                                    //println((prodLocs[index]["storeName"]) as String)
+                                    //println((prodLocs[index]["latitude"]) as Float)
+                                    //println((prodLocs[index]["longitude"]) as Float)
+                                
+                                    if let storeName = prodLocs[index]["storeName"] as? Double {
+                                    }
+                                    
+                                    if let storeAddress = prodLocs[index]["storeAddress"] as? Double {
+                                    }
+                                    
+                                    if let tmpStoreLat = prodLocs[index]["latitude"] as? Double {
+                                        storeLat = tmpStoreLat
+                                    }
+                                    if let tmpStoreLng = prodLocs[index]["longitude"] as? Double {
+                                        storeLng = tmpStoreLng
+                                    }
+                                    
+                                    let annotation = MKPointAnnotation()
+                                    let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
+                                    annotation.setCoordinate(coordinate)
+                                    annotation.title = storeName
+                                    annotation.subtitle = storeAddress
+                                    self.annotations.append(annotation)
+                                    self.mapView.addAnnotation(annotation)
+                                    
+                                }
+                                lastStore = ((prodLocs[index]["storeName"]) as String)
+                            }
+                        }
+                    }
+                }
+   
+      
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+
+
+        // read store from the heroku endpoint
+    }
+
+    func getStore()
+    {
+        let manager = AFHTTPRequestOperationManager()
+        
         let storeEndpointURL = "https://cbi-api-test.herokuapp.com/v2/stores/5110665?apiKey=1&signature=Ydz7LTPUq2gVAE/WobrHnpSLNh1WtyVfcWOHu3exR3w="
         // read store from the heroku endpoint
         manager.GET( storeEndpointURL,
@@ -112,24 +219,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
         })
-        
-        // Code to add array of annotation map pins
-        //self.mapView.addAnnotations(self.annotations)
-        
-        
-        /* Code to drop map pins
-        self.annotations = []
-        for business in results {
-        let annotation = MKPointAnnotation()
-        let coordinate = CLLocationCoordinate2D(latitude: business.latitude!, longitude: business.longitude!)
-        annotation.setCoordinate(coordinate)
-        annotation.title = business.name
-        annotation.subtitle = business.displayCategories
-        self.annotations.append(annotation)
-        }
-        self.mapView.addAnnotations(self.annotations)
-        */
-        
+
     }
 
     func requestLocation() {
@@ -159,12 +249,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func onUserLocationChange() {
         if !foundUserLocation
         {
+            getStores()
+            
             let center = self.location.coordinate
-            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let span = MKCoordinateSpanMake(0.8, 0.8)
             self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
+            
+            self.latitude = center.latitude
+            self.longitude = center.longitude
             // code to show users location with a blue dot
             //mapView.showsUserLocation = true
             foundUserLocation = true
+            //centerMapByMiles(25)
+            
         }
     }
     
@@ -181,14 +279,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
 
     func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
+        
+        if !foundUserLocation {
+            return
+        }
         println("New Location: ")
-        println(userLocation)
+       // println(userLocation)
         
         let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
         println("new center")
         println(newLoc.latitude)
         println(newLoc.longitude)
+        
+        self.latitude = newLoc.latitude
+        self.longitude = newLoc.longitude
+        
+        getStores()
         
         /*
         // Not getting called
@@ -207,6 +314,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         */
     }
  
+    func centerMapByMiles(miles: Double) {
+        var location = mapView.centerCoordinate
+        var span = MKCoordinateSpanMake(0.1, 0.1)
+        var region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        //let miles = 15.0;
+        var scalingFactor =  (cos(2 * M_PI * location.latitude / 360.0) );
+        if scalingFactor < 0 {
+            scalingFactor = scalingFactor * (-1)
+        }
+        var mySpan = MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
+        
+        mySpan.latitudeDelta = miles/69.0;
+        mySpan.longitudeDelta = miles/(scalingFactor * 69.0);
+        
+        var myRegion = MKCoordinateRegion(center: location, span: mySpan)
+        
+        mapView.setRegion(myRegion, animated: true)
+    }
     
 }
 
