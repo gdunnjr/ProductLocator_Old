@@ -7,19 +7,173 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    var locationManager: CLLocationManager = CLLocationManager()
+    var annotations: Array<MKPointAnnotation>!
 
+    // these will hold current location, set some defaults justin case
+    var latitude: Double = 37.7710347
+    var longitude: Double = -122.4040795
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        mapView.delegate = self
+        
+        // Get the current location
+        self.requestLocation()
+        
+       
+        // Code to get the bounding box of the visible map area
+        /*
+        var getLat: CLLocationDegrees = mapView.centerCoordinate.latitude
+        var getLng: CLLocationDegrees = mapView.centerCoordinate.longitude
+        let rect = self.mapView.visibleMapRect
+        let neCoord = MKCoordinateForMapPoint(MKMapPointMake(MKMapRectGetMaxX(rect), rect.origin.y))
+        let swCoord = MKCoordinateForMapPoint(MKMapPointMake(rect.origin.x, MKMapRectGetMaxY(rect)))
+        println("\(swCoord.latitude),\(swCoord.longitude)|\(neCoord.latitude),\(neCoord.longitude)")
+        */
+        
+        // array to hold map pins
+        self.annotations = []
+        
+        // Example of how to read json from a file
+        let filePath = NSBundle.mainBundle().pathForResource("data",ofType:"json")
+        var readError:NSError?
+        if let data = NSData(contentsOfFile:filePath!, options:NSDataReadingOptions.DataReadingUncached, error:&readError) {
+            var jsonErrorOptional: NSError?
+            if let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: nil, error:&jsonErrorOptional) as? NSDictionary {
+                if let tmpStoreName = jsonResult["store_dsc"] as? String {
+                    let myStoreName = tmpStoreName
+                    println(myStoreName)
+                }
+                if let tmpStoreAddress = jsonResult["address"] as? String {
+                    let myStoreAddress = tmpStoreAddress
+                    println(myStoreAddress)
+                }
+            }
+        }
+        
+        let manager = AFHTTPRequestOperationManager()
+        let storeEndpointURL = "https://cbi-api-test.herokuapp.com/v2/stores/5110665?apiKey=1&signature=Ydz7LTPUq2gVAE/WobrHnpSLNh1WtyVfcWOHu3exR3w="
+        // read store from the heroku endpoint
+        manager.GET( storeEndpointURL,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                println("JSON: " + String(responseObject.description))
+                
+                var storeName = ""
+                var storeAddress = ""
+                var storeState = ""
+                var storeZip = ""
+                var storePhone = ""
+                var storeLat : Double = 0.00
+                var storeLng : Double = 0.00
+                // Parsing without Swift Library
+                if let productLocation = responseObject[0] as? NSDictionary {
+                    if let tmpStoreName = productLocation["store_dsc"] as? String {
+                        storeName = tmpStoreName
+                    }
+                    if let tmpStoreAddress = productLocation["address"] as? String {
+                        storeAddress = tmpStoreAddress
+                    }
+                    if let tmpStoreState = productLocation["state"] as? String {
+                        storeState = tmpStoreState
+                    }
+                    if let tmpStoreZip = productLocation["postal_cd"] as? String {
+                        storeZip = tmpStoreZip
+                    }
+                    if let tmpStorePhone = productLocation["phone_no"] as? String {
+                        storePhone = tmpStorePhone
+                    }
+                    if let tmpStoreLat = productLocation["latitude"] as? Double {
+                        storeLat = tmpStoreLat
+                    }
+                    if let tmpStoreLng = productLocation["longitude"] as? Double {
+                        storeLng = tmpStoreLng
+                    }
+                    
+                    let annotation = MKPointAnnotation()
+                    let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
+                    annotation.setCoordinate(coordinate)
+                    annotation.title = storeName
+                    annotation.subtitle = storeAddress
+                    self.annotations.append(annotation)
+                    self.mapView.addAnnotation(annotation)
+                    
+                }
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+        
+        // Code to add array of annotation map pins
+        //self.mapView.addAnnotations(self.annotations)
+        
+        
+        /* Code to drop map pins
+        self.annotations = []
+        for business in results {
+        let annotation = MKPointAnnotation()
+        let coordinate = CLLocationCoordinate2D(latitude: business.latitude!, longitude: business.longitude!)
+        annotation.setCoordinate(coordinate)
+        annotation.title = business.name
+        annotation.subtitle = business.displayCategories
+        self.annotations.append(annotation)
+        }
+        self.mapView.addAnnotations(self.annotations)
+        */
+        
+    }
+    
+
+    func requestLocation() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let location = locations.last as CLLocation
+        if location.horizontalAccuracy > 0 {
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+            
+            onUserLocationChange()
+            
+            self.locationManager.stopUpdatingLocation()
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(60.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                self.locationManager.startUpdatingLocation()
+            })
+        }
     }
 
+    func onUserLocationChange() {
+        let center = self.location.coordinate
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
+        // code to show users location with a blue dot
+        //mapView.showsUserLocation = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    var location: CLLocation {
+        get {
+            return CLLocation(latitude: self.latitude, longitude: self.longitude)
+        }
+    }
 }
+
+
 
