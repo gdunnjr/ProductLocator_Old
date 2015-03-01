@@ -15,6 +15,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
+    var foundUserLocation = false
 
     // these will hold current location, set some defaults justin case
     var latitude: Double = 37.7710347
@@ -130,7 +131,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         */
         
     }
-    
 
     func requestLocation() {
         self.locationManager.delegate = self
@@ -149,18 +149,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             self.locationManager.stopUpdatingLocation()
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(60.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(time, dispatch_get_main_queue(), {
-                self.locationManager.startUpdatingLocation()
-            })
+            //dispatch_after(time, dispatch_get_main_queue(), {
+            //    self.locationManager.startUpdatingLocation()
+            //})
         }
+
     }
 
     func onUserLocationChange() {
-        let center = self.location.coordinate
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
-        // code to show users location with a blue dot
-        //mapView.showsUserLocation = true
+        if !foundUserLocation
+        {
+            let center = self.location.coordinate
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
+            // code to show users location with a blue dot
+            //mapView.showsUserLocation = true
+            foundUserLocation = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -173,6 +178,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return CLLocation(latitude: self.latitude, longitude: self.longitude)
         }
     }
+    
+
+    func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
+        println("New Location: ")
+        println(userLocation)
+        
+        let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
+        
+        println("new center")
+        println(newLoc.latitude)
+        println(newLoc.longitude)
+        
+        /*
+        // Not getting called
+        if let loc = userLocation {
+        getProductLocations(userLocation.coordinate)
+        }
+        let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
+        
+        var annotation = MKPointAnnotation()
+        annotation.setCoordinate(newLoc)
+        annotation.title = "Yo"
+        annotation.subtitle = "Yo"
+        self.mapView.addAnnotation(annotation)
+        
+        getProductLocations(newLoc)
+        */
+    }
+ 
+    
 }
 
 
