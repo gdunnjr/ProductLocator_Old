@@ -100,7 +100,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
-        let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=jet&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=198&radiusInMiles=15&premiseTypeDesc=OFF%20PREMISE&from=0&to=50"
+        let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=jet&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=OFF%20PREMISE&from=0&to=50"
         
         println(self.latitude)
         println(self.longitude)
