@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mtb-NL-oqW">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Constellation Wine Finder-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ProductLocator" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,17 +41,31 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjn-O1-xvE">
+                                <rect key="frame" x="174" y="451" width="101" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="7dZ-xe-92H"/>
+                                </constraints>
+                                <state key="normal" title="Change Filters">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rPE-bR-Spg" kind="show" id="m1l-Rq-W0t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-9" id="0qr-NB-kxH"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5he-JW-F65"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vjn-O1-xvE" secondAttribute="trailing" constant="29" id="7q1-Ir-cQc"/>
                             <constraint firstAttribute="trailing" secondItem="b5c-pG-qGj" secondAttribute="trailing" id="C0N-zd-kZA"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="10" id="C7e-Ly-uZd"/>
                             <constraint firstAttribute="trailing" secondItem="b5c-pG-qGj" secondAttribute="trailing" id="Clv-hq-Zlo"/>
                             <constraint firstItem="dAA-kC-D9s" firstAttribute="top" secondItem="ARj-fO-qB8" secondAttribute="bottom" id="EqD-nS-c82"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Mwi-EV-tSe"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="b5c-pG-qGj" secondAttribute="bottom" id="N8k-Iv-pjQ"/>
+                            <constraint firstItem="Vjn-O1-xvE" firstAttribute="trailing" secondItem="ARj-fO-qB8" secondAttribute="trailing" id="Oyt-0r-k25"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="b5c-pG-qGj" secondAttribute="bottom" constant="39" id="SGt-ef-fXf"/>
                             <constraint firstItem="ARj-fO-qB8" firstAttribute="leading" secondItem="b5c-pG-qGj" secondAttribute="trailing" constant="-304" id="VhS-4A-5nz"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="10" id="Wpp-Cw-9xi"/>
@@ -59,6 +73,7 @@
                             <constraint firstItem="ARj-fO-qB8" firstAttribute="top" secondItem="b5c-pG-qGj" secondAttribute="bottom" constant="-78" id="a0x-8G-r1x"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="dAA-kC-D9s" secondAttribute="trailing" constant="-304" id="ceS-av-LhV"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="d5v-Na-btl"/>
+                            <constraint firstItem="ARj-fO-qB8" firstAttribute="top" secondItem="Vjn-O1-xvE" secondAttribute="bottom" constant="-1" id="d7Y-Ao-9oi"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="ARj-fO-qB8" secondAttribute="trailing" constant="-295" id="eQd-3h-5pp"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="ARj-fO-qB8" secondAttribute="trailing" constant="-304" id="gQJ-3f-4fq"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="h6H-gp-SLQ"/>
@@ -90,6 +105,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Constellation Wine Finder" id="TzL-Tr-9Ad">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="ObL-Gv-UgQ"/>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -98,6 +116,53 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="579" y="51"/>
+        </scene>
+        <!--Change Filters-->
+        <scene sceneID="RfW-ST-yed">
+            <objects>
+                <tableViewController title="Change Filters" id="rPE-bR-Spg" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="roP-gU-bDH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MVg-oe-RSQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVg-oe-RSQ" id="sJb-tz-p2Y">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rPE-bR-Spg" id="F1e-3V-WX1"/>
+                            <outlet property="delegate" destination="rPE-bR-Spg" id="Nwd-hz-pjc"/>
+                        </connections>
+                    </tableView>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OF1-VU-nNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056" y="51"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="g16-3V-viK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mtb-NL-oqW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="81R-pf-MIr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="eOd-Rg-S7g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHP-yJ-cE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-233" y="51"/>
         </scene>
     </scenes>
 </document>
