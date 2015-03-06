@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		640E78FDB4F24B57CE2AF0B6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1030D66D39E152D1AE084 /* libPods.a */; };
+		B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */; };
 		B86BD8F31AA0DEFB0033E64B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */; };
 		B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F41AA0DEFB0033E64B /* ViewController.swift */; };
 		B86BD8F81AA0DEFB0033E64B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8F61AA0DEFB0033E64B /* Main.storyboard */; };
 		B86BD8FA1AA0DEFB0033E64B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8F91AA0DEFB0033E64B /* Images.xcassets */; };
 		B86BD8FD1AA0DEFB0033E64B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8FB1AA0DEFB0033E64B /* LaunchScreen.xib */; };
 		B86BD9091AA0DEFB0033E64B /* ProductLocatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */; };
+		B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */; };
 		B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CF79FE1AA2247800795EB7 /* MapKit.framework */; };
 		B8F1E9A41AA12B0500D467D0 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8F1E9A31AA12B0500D467D0 /* data.json */; };
 		B8F831311AA27BA60080DA43 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B8F831301AA27BA60080DA43 /* Podfile */; };
@@ -31,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		77D1030D66D39E152D1AE084 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FiltersTableViewController.swift; path = ../FiltersTableViewController.swift; sourceTree = "<group>"; };
 		B86BD8ED1AA0DEFB0033E64B /* ProductLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86BD8F11AA0DEFB0033E64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 		B86BD9021AA0DEFB0033E64B /* ProductLocatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLocatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86BD9071AA0DEFB0033E64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLocatorTests.swift; sourceTree = "<group>"; };
+		B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductLocatorFilters.swift; sourceTree = "<group>"; };
 		B8B44A231AA0E30600E0B7F8 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B8CF79FE1AA2247800795EB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B8F1E9A31AA12B0500D467D0 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 		B86BD8EF1AA0DEFB0033E64B /* ProductLocator */ = {
 			isa = PBXGroup;
 			children = (
+				B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */,
 				B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */,
 				B86BD8F41AA0DEFB0033E64B /* ViewController.swift */,
 				B86BD8F61AA0DEFB0033E64B /* Main.storyboard */,
@@ -119,6 +124,7 @@
 				B86BD8FB1AA0DEFB0033E64B /* LaunchScreen.xib */,
 				B86BD8F01AA0DEFB0033E64B /* Supporting Files */,
 				B8F1E9A31AA12B0500D467D0 /* data.json */,
+				B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */,
 			);
 			path = ProductLocator;
 			sourceTree = "<group>";
@@ -285,6 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */,
+				B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */,
 				B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */,
 				B86BD8F31AA0DEFB0033E64B /* AppDelegate.swift in Sources */,
 			);
