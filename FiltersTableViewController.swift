@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FiltersTableViewController: UITableViewController {
+class FiltersTableViewController: UITableViewController,UINavigationBarDelegate {
     
+    var delegate: FiltersViewDelegate?
     var model: ProductLocatorFilters?
     
     override func viewDidLoad() {
@@ -19,6 +20,13 @@ class FiltersTableViewController: UITableViewController {
         
         // Create a new instance of the model for this "session"
         self.model = ProductLocatorFilters(instance: ProductLocatorFilters.instance)
+        
+        // force it to reload - simple way
+        //tableView.reloadData()
+        
+        // reload a section of the table
+        //tableView.reloadSections(<#sections: NSIndexSet#>, withRowAnimation: <#UITableViewRowAnimation#>)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -141,6 +149,24 @@ class FiltersTableViewController: UITableViewController {
         }
     }
 
+    // this override is necessary to properly position the nav bar at the top
+    func positionForBar(bar: UIBarPositioning!) -> UIBarPosition {
+        return UIBarPosition.TopAttached
+    }
+    
+    @IBAction func handleSearchButton(sender: AnyObject) {
+        
+        // Commit the changes to the global instance of the filters
+        ProductLocatorFilters.instance.copyStateFrom(self.model!)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate?.onFiltersDone(self)
+
+    }
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -187,3 +213,8 @@ class FiltersTableViewController: UITableViewController {
     */
 
 }
+
+protocol FiltersViewDelegate {
+    func onFiltersDone(controller: FiltersTableViewController)
+}
+

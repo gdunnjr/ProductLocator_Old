@@ -9,10 +9,11 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var brandVarietalLable: UILabel!
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
     var foundUserLocation = false
@@ -24,12 +25,34 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
+    enum premise: Int {
+        case OnPremise = 0
+        case OffPremise = 1
+        case Jack, Queen, King
+        func filterDescription() -> String {
+            switch self {
+            case .OnPremise:
+                return "ON%20PREMISE"
+            case .OffPremise:
+                return "OFF%20PREMISE"
+            default:
+                return String(self.rawValue)
+            }
+        }
+    }
+    
+    var premiseType = premise.OnPremise
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
    
         mapView.delegate = self
         
+        // round the corners on the label
+        brandVarietalLable.layer.masksToBounds = true
+        brandVarietalLable.layer.cornerRadius = 10
+            
         // Get the current location
         self.requestLocation()
         
@@ -86,6 +109,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "modalFilterSegue"
+        {
+            let destVC = segue.destinationViewController as FiltersTableViewController
+            destVC.delegate = self
+        }
+    }
     
     func getStores()
     {
@@ -100,7 +130,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
-        let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=OFF%20PREMISE&from=0&to=50"
+        let baseURL = "https://api.cbrands.com/beta/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
         
         println(self.latitude)
         println(self.longitude)
@@ -362,6 +392,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.setRegion(myRegion, animated: true)
     }
     
+    final func onFiltersDone(controller: FiltersTableViewController) {
+       // if self.searchBar.text != "" {
+       //     self.clearResults();
+       //     self.performSearch(self.searchBar.text)
+       // }
+        println("back to map page")
+    }
+    
+    
+    @IBAction func premiseBarAction(sender: AnyObject) {
+        
+        let barButton = sender as UISegmentedControl
+        if barButton.selectedSegmentIndex == 1
+        {
+            premiseType = premise.OffPremise
+        }
+        else
+        {
+            premiseType = premise.OnPremise
+        }
+        mapView.removeAnnotations(mapView.annotations)
+        getStores()
+    }
+    
+    @IBAction func mapCurrentLocationPinTapped(sender: AnyObject) {
+        mapView.removeAnnotations(mapView.annotations)
+        foundUserLocation = false
+        requestLocation()
+
+    }
 }
 
 
