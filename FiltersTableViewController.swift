@@ -8,10 +8,17 @@
 
 import UIKit
 
-class FiltersTableViewController: UITableViewController,UINavigationBarDelegate {
+class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,NSXMLParserDelegate {
     
     var delegate: FiltersViewDelegate?
     var model: ProductLocatorFilters?
+    
+    // variables for parsing the varietals xml
+    var parser = NSXMLParser()
+    var elements = NSMutableDictionary()
+    var element = NSString()
+    var varietalBlendCd = NSMutableString()
+    var varietalBlendDsc = NSMutableString()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +27,13 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
         
         // Create a new instance of the model for this "session"
         self.model = ProductLocatorFilters(instance: ProductLocatorFilters.instance)
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
+        
+        let searchButton = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "searchButtonTapped")
+        
+        self.navigationItem.leftBarButtonItem = cancelButton
+        self.navigationItem.rightBarButtonItem = searchButton
         
         // force it to reload - simple way
         //tableView.reloadData()
@@ -112,6 +126,8 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var reloadVarietals = false
+        
         let filter = self.model!.filters[indexPath.section]
         switch filter.type {
         case .Single:
@@ -121,6 +137,12 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
                     filter.selectedIndex = indexPath.row
                     let previousIndexPath = NSIndexPath(forRow: previousIndex, inSection: indexPath.section)
                     self.tableView.reloadRowsAtIndexPaths([indexPath, previousIndexPath], withRowAnimation: .Automatic)
+                
+                    println(indexPath.section)
+                    if indexPath.section == 0 {
+                        reloadVarietals = true
+                    }
+                
                 }
             }
             
@@ -135,6 +157,8 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
             } else {
                 self.tableView.reloadSections(NSMutableIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
             }
+ 
+
         case .Multiple:
             if !filter.opened && indexPath.row == filter.numItemsVisible {
                 filter.opened = true
@@ -147,14 +171,21 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
         default:
             break
         }
+        
+        if reloadVarietals == true {
+            //self.tableView.reloadData()
+            getVarietals(filter.options[indexPath.row].value)
+            //self.tableView.reloadData()
+        }
+ 
     }
-
+        
     // this override is necessary to properly position the nav bar at the top
     func positionForBar(bar: UIBarPositioning!) -> UIBarPosition {
         return UIBarPosition.TopAttached
     }
     
-    @IBAction func handleSearchButton(sender: AnyObject) {
+    func searchButtonTapped() {
         
         // Commit the changes to the global instance of the filters
         ProductLocatorFilters.instance.copyStateFrom(self.model!)
@@ -163,9 +194,122 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate 
 
     }
     
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+    func cancelButtonTapped() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!)
+    {
+        var varCd = ""
+        var varDsc = ""
+        
+        if (elementName as NSString).isEqualToString("plBrandDetails") {
+            if !varietalBlendCd.isEqual(nil) {
+                //elements.setObject(title1, forKey: "varietalBlendCd")
+                varCd = varietalBlendCd as String
+                println(varCd)
+            }
+            if !varietalBlendDsc.isEqual(nil) {
+                //elements.setObject(title1, forKey: "varietalBlendCd")
+                varDsc = varietalBlendDsc as String
+                println(varDsc)
+            }
+            
+            // add it
+            let option = Option(label: varietalBlendDsc as String, name: varietalBlendDsc as String, value: varietalBlendCd as String, selected: false)
+            
+            
+            // see if it already exists
+            var alreadyAdded = false
+            if self.model!.filters[1].options.count > 0 {
+                for index in 0...self.model!.filters[1].options.count-1 {
+                    if self.model!.filters[1].options[index].value == varCd {
+                        alreadyAdded = true
+                        break
+                    }
+                }
+            }
+            if !alreadyAdded {
+                self.model!.filters[1].options.append(option)
+            }
+
+        }
+    }
+  
+    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
+        element = elementName
+
+        
+        if (elementName as NSString).isEqualToString("plBrandDetails")
+        {
+            elements = NSMutableDictionary.alloc()
+            elements = [:]
+            varietalBlendCd = NSMutableString.alloc()
+            varietalBlendCd = ""
+            varietalBlendDsc = NSMutableString.alloc()
+            varietalBlendDsc = ""
+
+            
+            //println(varietalBlendCd)
+            //println(varietalBlendDsc)
+        }
+     }
+  
+    func parser(parser: NSXMLParser!, foundCharacters string: String!)
+    {
+        if element.isEqualToString("varietalBlendCd") {
+            varietalBlendCd.appendString(string)
+        } else if element.isEqualToString("varietalBlendDsc") {
+            varietalBlendDsc.appendString(string)
+        }
+    
+        //println(varietalBlendCd)
+        //println(varietalBlendDsc)
+        
+    }
+ 
+    
+    func getVarietals(brandCode: String)
+    {
+        
+        //activityIndicator.frame = CGRectMake(100, 100, 100, 100);
+        //activityIndicator.startAnimating()
+        //activityIndicator.center = self.view.center
+        //self.view.addSubview( activityIndicator )
+        
+        //let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
+        
+        
+        //let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
+        let baseURL = "https://api.cbrands.com/pl/brand/\(brandCode)?apiKey=ldtst"
+        
+        let manager = AFHTTPRequestOperationManager()
+        let xmlSerializer = AFXMLParserResponseSerializer()
+        manager.responseSerializer = xmlSerializer
+        manager.GET( baseURL,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                //println("JSON: " + String(responseObject.description))
+                
+                self.model!.filters[1].options.removeAll(keepCapacity: false)
+                
+                let xmlParser = responseObject as NSXMLParser
+                xmlParser.delegate = self
+                xmlParser.parse()
+                self.model!.filters[1].options[0].selected = true
+                
+                //self.tableView.reloadSections(NSMutableIndexSet(index: 1), withRowAnimation: .Automatic)
+                self.tableView.reloadData()
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+
+        
+    }
+    
+    
     
     /*
     // Override to support conditional editing of the table view.
