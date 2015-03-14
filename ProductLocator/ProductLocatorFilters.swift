@@ -27,7 +27,7 @@ class ProductLocatorFilters {
             name: "brand_filter",
             options: [
                 Option(label: "Woodbridge", value: "631", selected: true),
-                Option(label: "MOUNT VEEDER", value: "426", selected: true)
+                Option(label: "MOUNT VEEDER", value: "426")
                 
             ],
             type: .Single,
@@ -63,14 +63,22 @@ class ProductLocatorFilters {
     init(instance: ProductLocatorFilters? = nil) {
         if instance != nil {
             self.copyStateFrom(instance!)
+        } else
+        {
+            getBrands()
         }
     }
     
     func copyStateFrom(instance: ProductLocatorFilters) {
         for var f = 0; f < self.filters.count; f++ {
-            for var o = 0; o < self.filters[f].options.count; o++ {
-                self.filters[f].options[o].selected = instance.filters[f].options[o].selected
-            }
+            var newOptions: Array<Option> = []
+                for var o = 0; o < instance.filters[f].options.count; o++ {
+                    newOptions.append(instance.filters[f].options[o])
+                }
+            self.filters[f].options = newOptions
+    //        for var o = 0; o < self.filters[f].options.count; o++ {
+    //            self.filters[f].options[o].selected = instance.filters[f].options[o].selected
+    //        }
         }
     }
     
@@ -103,6 +111,37 @@ class ProductLocatorFilters {
             }
             return parameters
         }
+    }
+    
+    func getBrands()
+    {
+        
+        let baseURL = "https://api.cbrands.com/pl/brands?apiKey=ldtst"
+        
+        let manager = AFHTTPRequestOperationManager()
+        let xmlSerializer = AFXMLParserResponseSerializer()
+        manager.responseSerializer = xmlSerializer
+        manager.GET( baseURL,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                //println("JSON: " + String(responseObject.description))
+                
+     //           self.model!.filters[1].options.removeAll(keepCapacity: false)
+                
+     //           let xmlParser = responseObject as NSXMLParser
+     //           xmlParser.delegate = self
+     //           xmlParser.parse()
+      //          self.model!.filters[1].options[0].selected = true
+                
+                //self.tableView.reloadSections(NSMutableIndexSet(index: 1), withRowAnimation: .Automatic)
+      //          self.tableView.reloadData()
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+        
+        
     }
     
     
