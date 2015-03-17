@@ -65,7 +65,7 @@ class ProductLocatorFilters {
             self.copyStateFrom(instance!)
         } else
         {
-            getBrands()
+            //getBrands()
         }
     }
     
@@ -113,37 +113,7 @@ class ProductLocatorFilters {
         }
     }
     
-    func getBrands()
-    {
         
-        let baseURL = "https://api.cbrands.com/pl/brands?apiKey=ldtst"
-        
-        let manager = AFHTTPRequestOperationManager()
-        let xmlSerializer = AFXMLParserResponseSerializer()
-        manager.responseSerializer = xmlSerializer
-        manager.GET( baseURL,
-            parameters: nil,
-            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                //println("JSON: " + String(responseObject.description))
-                
-     //           self.model!.filters[1].options.removeAll(keepCapacity: false)
-                
-     //           let xmlParser = responseObject as NSXMLParser
-     //           xmlParser.delegate = self
-     //           xmlParser.parse()
-      //          self.model!.filters[1].options[0].selected = true
-                
-                //self.tableView.reloadSections(NSMutableIndexSet(index: 1), withRowAnimation: .Automatic)
-      //          self.tableView.reloadData()
-                
-            },
-            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-                println("Error: " + error.localizedDescription)
-        })
-        
-        
-    }
-    
     
     
     class var instance: ProductLocatorFilters {

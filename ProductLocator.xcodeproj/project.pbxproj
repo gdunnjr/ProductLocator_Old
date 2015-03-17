@@ -17,6 +17,7 @@
 		B86BD9091AA0DEFB0033E64B /* ProductLocatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */; };
 		B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */; };
 		B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CF79FE1AA2247800795EB7 /* MapKit.framework */; };
+		B8D4A10A1AB50FB2009E570A /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4A1091AB50FB2009E570A /* AEXML.swift */; };
 		B8F1E9A41AA12B0500D467D0 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8F1E9A31AA12B0500D467D0 /* data.json */; };
 		B8F831311AA27BA60080DA43 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B8F831301AA27BA60080DA43 /* Podfile */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductLocatorFilters.swift; sourceTree = "<group>"; };
 		B8B44A231AA0E30600E0B7F8 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B8CF79FE1AA2247800795EB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B8D4A1091AB50FB2009E570A /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AEXML.swift; path = ../AEXML.swift; sourceTree = "<group>"; };
 		B8F1E9A31AA12B0500D467D0 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		B8F831301AA27BA60080DA43 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		CFE3E51A2EDDECBF829BFB12 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		B86BD8EF1AA0DEFB0033E64B /* ProductLocator */ = {
 			isa = PBXGroup;
 			children = (
+				B8D4A1091AB50FB2009E570A /* AEXML.swift */,
 				B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */,
 				B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */,
 				B86BD8F41AA0DEFB0033E64B /* ViewController.swift */,
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D4A10A1AB50FB2009E570A /* AEXML.swift in Sources */,
 				B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */,
 				B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */,
 				B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */,

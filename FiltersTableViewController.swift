@@ -20,6 +20,8 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     var varietalBlendCd = NSMutableString()
     var varietalBlendDsc = NSMutableString()
     
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,12 +30,19 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         // Create a new instance of the model for this "session"
         self.model = ProductLocatorFilters(instance: ProductLocatorFilters.instance)
         
+        // load up the brands
+        if self.model!.filters[0].options.count<=2 {
+            getBrands()
+        }
+
+        
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
         
         let searchButton = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "searchButtonTapped")
         
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = searchButton
+        
         
         // force it to reload - simple way
         //tableView.reloadData()
@@ -309,8 +318,81 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         
     }
     
-    
-    
+    func getBrands()
+    {
+        
+        activityIndicator.frame = CGRectMake(100, 100, 100, 100);
+        activityIndicator.startAnimating()
+        activityIndicator.center = self.view.center
+        self.view.addSubview( activityIndicator )
+        
+        let baseURL = "https://api.cbrands.com/pl/brands.json?apiKey=ldtst"
+       
+        let manager = AFHTTPRequestOperationManager()
+        manager.GET( baseURL,
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                //println("JSON: " + String(responseObject.description))
+                
+                var brandCd = ""
+                var brandDsc = ""
+                
+                if let brandsJsonDict = responseObject as? NSDictionary {
+                    
+                    if let brands = brandsJsonDict["brand"] as? NSArray {
+                        
+                        if brands.count == 0
+                        {
+                            println("no brands")
+                        }
+                        else
+                        {
+                            
+                            self.model!.filters[0].options.removeAll(keepCapacity: false)
+                
+                            for index in 0...brands.count-1 {
+                                if let tmpBrandCd = brands[index]["brandCd"] as? String {
+                                    brandCd = tmpBrandCd
+                                    println(brandCd)
+                                }
+                                
+                                if let tmpBrandDsc = brands[index]["brandDsc"] as? String {
+                                    brandDsc = tmpBrandDsc
+                                    println(brandDsc)
+                                }
+                                
+                                // add it
+                                let option = Option(label: brandDsc as String, name: brandDsc as String, value: brandCd as String, selected: false)
+                                
+                                // see if it already exists
+                                var alreadyAdded = false
+                                if self.model!.filters[0].options.count > 0 {
+                                    for index in 0...self.model!.filters[0].options.count-1 {
+                                        if self.model!.filters[0].options[index].value == brandCd {
+                                            alreadyAdded = true
+                                            break
+                                        }
+                                    }
+                                }
+                                if !alreadyAdded {
+                                    self.model!.filters[0].options.append(option)
+                                }
+                                
+                            }
+                            self.model!.filters[0].options[0].selected = true
+                        }
+                    }
+                }
+                self.activityIndicator.stopAnimating()
+                
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+        })
+
+        
+    }
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
