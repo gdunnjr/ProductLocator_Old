@@ -14,6 +14,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var brandVarietalLable: UILabel!
+    
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
     var foundUserLocation = false
@@ -42,6 +43,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     var premiseType = premise.OnPremise
+    var brandCdFilter = "631"
+    var varietalCdFilter = "225"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +136,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
-        let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
+        let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
         
         println(self.latitude)
         println(self.longitude)
@@ -396,23 +399,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     final func onFiltersDone(controller: FiltersTableViewController) {
-       // if self.searchBar.text != "" {
-       //     self.clearResults();
-       //     self.performSearch(self.searchBar.text)
-       // }
         println("back to map page")
-        let filter = ProductLocatorFilters.instance.filters[0] as Filter
         
-        for index in 0...filter.options.count-1 {
-            let option = filter.options[index] as Option
-            if option.selected {
-                println(option.label)
-            }
-        }
-
+        //let brandFilterObj = ProductLocatorFilters.instance.filters[0] as Filter
+        println(ProductLocatorFilters.instance.filters[0].selectedOptions[0].label)
+        println(ProductLocatorFilters.instance.filters[1].selectedOptions[0].label)
+        
+        brandCdFilter=ProductLocatorFilters.instance.filters[0].selectedOptions[0].value
+        varietalCdFilter=ProductLocatorFilters.instance.filters[1].selectedOptions[0].value
+        
+        brandVarietalLable.text = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
+        
+        mapView.removeAnnotations(mapView.annotations)
+        getStores()
+        
     }
-    
-    
+
     @IBAction func premiseBarAction(sender: AnyObject) {
         
         let barButton = sender as UISegmentedControl

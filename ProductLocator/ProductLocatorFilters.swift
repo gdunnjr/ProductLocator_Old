@@ -26,9 +26,7 @@ class ProductLocatorFilters {
             label: "Brand",
             name: "brand_filter",
             options: [
-                Option(label: "Woodbridge", value: "631", selected: true),
-                Option(label: "MOUNT VEEDER", value: "426")
-                
+                Option(label: "WOODBRIDGE BY ROBERT MONDAVI", value: "631", selected: true)                
             ],
             type: .Single,
             numItemsVisible: 3
@@ -38,22 +36,19 @@ class ProductLocatorFilters {
             label: "Varietal",
             name: "varietal_filter",
             options: [
-                Option(label: "SWEET WHITE", value: "421"),
-                Option(label: "SAUVIGNON BLANC", value: "667"),
-                Option(label: "WHITE ZINFANDEL", value: "827"),
-                Option(label: "PINOT NOIR", value: "584"),
-
-                Option(label: "LIGHTLY OAKED CHARDONNAY", value: "437"),
-                Option(label: "MIXED VARIETIES", value: "496"),
-                Option(label: "MALBEC", value: "455"),
+                Option(label: "CABERNET SAUVIGNON", value: "199"),
                 Option(label: "CABERNET SAUVIGNON", value: "198"),
-                Option(label: "PINOT GRIGIO", value: "580"),
-                Option(label: "CHARDONNAY", value: "225", selected: true),
-                Option(label: "PINK MOSCATO", value: "897"),
                 Option(label: "CABERNET SAUVIGNON MERLOT", value: "198"),
-                Option(label: "CABERNET SAUVIGNON", value: "199")
-
-                
+                Option(label: "CHARDONNAY", value: "225", selected: true),
+                Option(label: "LIGHTLY OAKED CHARDONNAY", value: "437"),
+                Option(label: "MALBEC", value: "455"),
+                Option(label: "MIXED VARIETIES", value: "496"),
+                Option(label: "PINOT GRIGIO", value: "580"),
+                Option(label: "PINK MOSCATO", value: "897"),
+                Option(label: "PINOT NOIR", value: "584"),
+                Option(label: "SAUVIGNON BLANC", value: "667"),
+                Option(label: "SWEET WHITE", value: "421"),
+                Option(label: "WHITE ZINFANDEL", value: "827")
             ],
             type: .Single,
             numItemsVisible: 3

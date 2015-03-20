@@ -182,9 +182,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         }
         
         if reloadVarietals == true {
-            //self.tableView.reloadData()
             getVarietals(filter.options[indexPath.row].value)
-            //self.tableView.reloadData()
         }
  
     }
@@ -257,10 +255,6 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
             varietalBlendCd = ""
             varietalBlendDsc = NSMutableString.alloc()
             varietalBlendDsc = ""
-
-            
-            //println(varietalBlendCd)
-            //println(varietalBlendDsc)
         }
      }
   
@@ -271,25 +265,12 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         } else if element.isEqualToString("varietalBlendDsc") {
             varietalBlendDsc.appendString(string)
         }
-    
-        //println(varietalBlendCd)
-        //println(varietalBlendDsc)
-        
     }
  
-    
+ 
     func getVarietals(brandCode: String)
     {
-        
-        //activityIndicator.frame = CGRectMake(100, 100, 100, 100);
-        //activityIndicator.startAnimating()
-        //activityIndicator.center = self.view.center
-        //self.view.addSubview( activityIndicator )
-        
-        //let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
-        
-        
-        //let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=631&varietalCode=225&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
+
         let baseURL = "https://api.cbrands.com/pl/brand/\(brandCode)?apiKey=ldtst"
         
         let manager = AFHTTPRequestOperationManager()
@@ -308,15 +289,18 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                 self.model!.filters[1].options[0].selected = true
                 
                 //self.tableView.reloadSections(NSMutableIndexSet(index: 1), withRowAnimation: .Automatic)
+                
+                self.model!.filters[1].options.sort { $0.label < $1.label }
+                
                 self.tableView.reloadData()
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
         })
-
-        
+        //println("in varietal sort...")
     }
+
     
     func getBrands()
     {
@@ -336,6 +320,10 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                 
                 var brandCd = ""
                 var brandDsc = ""
+                var firstLoad = false
+                if self.model!.filters[0].options.count == 1 {
+                    firstLoad = true
+                }
                 
                 if let brandsJsonDict = responseObject as? NSDictionary {
                     
@@ -380,14 +368,25 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                                 
                             }
                             self.model!.filters[0].options[0].selected = true
+                            // if first load, select woodbridge
+                            for index in 0...self.model!.filters[0].options.count-1 {
+                                if self.model!.filters[0].options[index].value == "631" {
+                                    self.model!.filters[0].options[0].selected = false
+                                    self.model!.filters[0].options[index].selected = true
+                                    break
+                                }
+                            }
+                            
                         }
                     }
                 }
+                self.model!.filters[0].options.sort({$0.label < $1.label })
                 self.activityIndicator.stopAnimating()
                 
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
+                self.activityIndicator.stopAnimating()
         })
 
         
