@@ -23,6 +23,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension

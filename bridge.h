@@ -7,3 +7,4 @@
 //
 
 #import "AFNetworking.h"
+#import "NewRelicAgent/NewRelic.h"
