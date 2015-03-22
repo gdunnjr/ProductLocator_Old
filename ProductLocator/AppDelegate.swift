@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // println(center!.latitude)
        // println(center!.longitude)
         
+        NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
+
         
         // Override point for customization after application launch.
         return true
