@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import AddressBook
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate {
     
@@ -52,10 +53,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
    
         mapView.delegate = self
         
-        // round the corners on the label
+        // round the corners on the label and add a border
         brandVarietalLable.layer.masksToBounds = true
         brandVarietalLable.layer.cornerRadius = 10
-            
+        brandVarietalLable.layer.borderWidth = 0.5
+        brandVarietalLable.layer.borderColor = UIColor.blueColor().CGColor
+        brandVarietalLable.text = " Filter: \n " + " " + brandVarietalLable.text!
+        
         // Get the current location
         self.requestLocation()
         
@@ -267,6 +271,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                     let annotation = MKPointAnnotation()
                     let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
+                  
+             
+                    
                     annotation.setCoordinate(coordinate)
                     annotation.title = storeName
                     annotation.subtitle = storeAddress
@@ -282,6 +289,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     }
 
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        
+        let identifier = "pin"
+        var view: MKPinAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+            as? MKPinAnnotationView { // 2
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+        } else {
+            // 3
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoLight) as UIView
+        }
+        return view
+    }
+    
     func requestLocation() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -399,8 +428,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     final func onFiltersDone(controller: FiltersTableViewController) {
-        println("back to map page")
-        
         //let brandFilterObj = ProductLocatorFilters.instance.filters[0] as Filter
         println(ProductLocatorFilters.instance.filters[0].selectedOptions[0].label)
         println(ProductLocatorFilters.instance.filters[1].selectedOptions[0].label)
@@ -408,7 +435,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         brandCdFilter=ProductLocatorFilters.instance.filters[0].selectedOptions[0].value
         varietalCdFilter=ProductLocatorFilters.instance.filters[1].selectedOptions[0].value
         
-        brandVarietalLable.text = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
+        var label = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
+        label = label.lowercaseString
+        label = label.capitalizedString
+        
+        brandVarietalLable.text = " Filter: \n" + " " + label
+        
+        //ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
         
         mapView.removeAnnotations(mapView.annotations)
         getStores()
@@ -434,6 +467,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.removeAnnotations(mapView.annotations)
         foundUserLocation = false
         requestLocation()
+    }
+
+    func openAMapWithCoordinates(theLat:Double, theLon:Double, targetDesc:String){
+        
+        var coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(theLat), CLLocationDegrees(theLon))
+        let addressDictionary = [String(kABPersonAddressStreetKey): targetDesc]
+        var placemark:MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary:addressDictionary)
+        var mapItem:MKMapItem = MKMapItem(placemark: placemark)
+        mapItem.name = targetDesc
+        let launchOptions:NSDictionary = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+        var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
+        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
+    }
+    
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
+        calloutAccessoryControlTapped control: UIControl!) {
+        let location = view.annotation
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        let lat: Double = location.coordinate.latitude
+        let lng: Double = location.coordinate.longitude
+        let locationTargetDesc:String = location.title! + " " + location.subtitle!
+        
+        openAMapWithCoordinates(location.coordinate.latitude, theLon:location.coordinate.longitude, targetDesc:locationTargetDesc)
 
     }
 }

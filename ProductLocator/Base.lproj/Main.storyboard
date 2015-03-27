@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mtb-NL-oqW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mtb-NL-oqW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -20,26 +20,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-pG-qGj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Woodbridge By Robert Mondavi - Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="ARj-fO-qB8">
-                                <rect key="frame" x="10" y="146" width="300" height="34"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="67A-XV-9kQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <searchBar contentMode="redraw" placeholder="Near Me, City, Zip or Full Address" translatesAutoresizingMaskIntoConstraints="NO" id="8qq-md-XZJ">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="13G-34-gdy"/>
-                                    <constraint firstAttribute="height" constant="44" id="aAb-z1-A8V"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CJf-6H-KdG">
-                                <rect key="frame" x="10" y="114" width="300" height="29"/>
+                                <rect key="frame" x="10" y="72" width="300" height="29"/>
                                 <segments>
                                     <segment title="On Premise Locations"/>
                                     <segment title="Off Premise Locations"/>
@@ -61,20 +43,26 @@
                                     <action selector="mapCurrentLocationPinTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="58O-kd-530"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woodbridge By Robert Mondavi - Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="ARj-fO-qB8">
+                                <rect key="frame" x="10" y="108" width="300" height="34"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="67A-XV-9kQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ARj-fO-qB8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="0E3-cE-KWe"/>
                             <constraint firstAttribute="trailing" secondItem="CEF-mH-c2u" secondAttribute="trailing" constant="16" id="0Ib-gS-k1J"/>
                             <constraint firstAttribute="trailing" secondItem="CJf-6H-KdG" secondAttribute="trailing" constant="10" id="1Rb-y9-9vZ"/>
-                            <constraint firstItem="CJf-6H-KdG" firstAttribute="top" secondItem="8qq-md-XZJ" secondAttribute="bottom" constant="6" id="1is-aO-L80"/>
-                            <constraint firstItem="8qq-md-XZJ" firstAttribute="leading" secondItem="b5c-pG-qGj" secondAttribute="leading" id="4Ft-kW-DoX"/>
+                            <constraint firstItem="ARj-fO-qB8" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="41x-Y6-jcn"/>
                             <constraint firstAttribute="trailing" secondItem="b5c-pG-qGj" secondAttribute="trailing" id="C0N-zd-kZA"/>
-                            <constraint firstAttribute="trailing" secondItem="8qq-md-XZJ" secondAttribute="trailing" id="GgL-Ry-ONF"/>
-                            <constraint firstItem="ARj-fO-qB8" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="4" id="MpN-TZ-GyI"/>
+                            <constraint firstItem="CJf-6H-KdG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="KFB-a4-Gbh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="b5c-pG-qGj" secondAttribute="bottom" id="N8k-Iv-pjQ"/>
-                            <constraint firstItem="8qq-md-XZJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Ny6-f9-4TV"/>
-                            <constraint firstItem="8qq-md-XZJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="TfL-6r-m5W"/>
                             <constraint firstAttribute="trailing" secondItem="CEF-mH-c2u" secondAttribute="trailing" constant="15" id="bF7-Td-tg8"/>
                             <constraint firstAttribute="trailing" secondItem="ARj-fO-qB8" secondAttribute="trailing" constant="10" id="lrA-Yl-N0K"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pbm-PF-Moo"/>
@@ -92,7 +80,9 @@
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="ObL-Gv-UgQ"/>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="lW8-x3-wno">
                             <connections>
-                                <segue destination="uCy-dr-YjK" kind="presentation" identifier="modalFilterSegue" id="f9Y-tK-1gK"/>
+                                <segue destination="uCy-dr-YjK" kind="popoverPresentation" identifier="modalFilterSegue" popoverAnchorBarButtonItem="lW8-x3-wno" id="f9Y-tK-1gK">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -114,16 +104,13 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="roP-gU-bDH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="MVg-oe-RSQ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterTableViewCellIdentifier" id="MVg-oe-RSQ">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVg-oe-RSQ" id="sJb-tz-p2Y">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="mjg-AS-WnW" kind="presentation" id="b8n-mH-SFt"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -138,32 +125,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OF1-VU-nNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1589" y="51"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="CHo-YV-iuB">
-            <objects>
-                <tableViewController id="mjg-AS-WnW" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Kin-ns-EfW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zky-WJ-CHb">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zky-WJ-CHb" id="tBL-Nh-2hu">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="mjg-AS-WnW" id="cni-tX-N3R"/>
-                            <outlet property="delegate" destination="mjg-AS-WnW" id="TnU-n1-seC"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ahm-bQ-Gyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2131" y="57"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g16-3V-viK">
