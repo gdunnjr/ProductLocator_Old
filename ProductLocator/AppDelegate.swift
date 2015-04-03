@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreLocation
+//import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    // var locationManager: CLLocationManager?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]!) -> Bool {
         
        //locationManager = CLLocationManager()
       //  locationManager?.requestWhenInUseAuthorization()
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // println(center!.latitude)
        // println(center!.longitude)
         
-        NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
+        //NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
 
         
         // Override point for customization after application launch.

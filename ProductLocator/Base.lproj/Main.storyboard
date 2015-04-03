@@ -80,9 +80,7 @@
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="ObL-Gv-UgQ"/>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="lW8-x3-wno">
                             <connections>
-                                <segue destination="uCy-dr-YjK" kind="popoverPresentation" identifier="modalFilterSegue" popoverAnchorBarButtonItem="lW8-x3-wno" id="f9Y-tK-1gK">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="uCy-dr-YjK" kind="presentation" identifier="modalFilterSegue" id="f9Y-tK-1gK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -106,11 +104,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterTableViewCellIdentifier" id="MVg-oe-RSQ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterTableViewCellIdentifier" rowHeight="44" id="MVg-oe-RSQ" customClass="FilterTableViewCell" customModule="ProductLocator" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVg-oe-RSQ" id="sJb-tz-p2Y">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="center" tableViewCell="MVg-oe-RSQ" id="sJb-tz-p2Y">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAn-vs-VuT">
+                                            <rect key="frame" x="8" y="0.0" width="71" height="44"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Woodbridge By Robert Mondavi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="FH7-hP-RXw">
+                                            <rect key="frame" x="20" y="8" width="186" height="25"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="brandImageView" destination="fAn-vs-VuT" id="cKg-dz-Gfy"/>
+                                    <outlet property="brandLabel" destination="FH7-hP-RXw" id="deY-F1-WTI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

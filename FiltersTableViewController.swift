@@ -8,25 +8,33 @@
 
 import UIKit
 
-class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,NSXMLParserDelegate {
+class FiltersTableViewController: UITableViewController,UINavigationBarDelegate, NSXMLParserDelegate {
     
     var delegate: FiltersViewDelegate?
     var model: ProductLocatorFilters?
     
     // variables for parsing the varietals xml
-    var parser = NSXMLParser()
+    //var parser = NSXMLParser()
     var elements = NSMutableDictionary()
     var element = NSString()
     var varietalBlendCd = NSMutableString()
     var varietalBlendDsc = NSMutableString()
     
+    @IBOutlet var customImageView: UIImageView!
+
+    @IBOutlet var customImageViewBrand: UIImageView!
+    
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     override func viewDidLoad() {
-
         super.viewDidLoad()
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = 44.0
+        if !Constants.IOSVersionConstants.less_than_iOS_8{
+            self.tableView.rowHeight = UITableViewAutomaticDimension
+        }
+        
+        //self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // Create a new instance of the model for this "session"
         self.model = ProductLocatorFilters(instance: ProductLocatorFilters.instance)
@@ -53,6 +61,11 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,24 +103,67 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+        
+        
+        //let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("filterTableViewCellIdentifier") as FilterTableViewCell
         
         let filter = self.model!.filters[indexPath.section] as Filter
         switch filter.type {
         case .Single:
             if filter.opened {
                 let option = filter.options[indexPath.row]
-                cell.textLabel!.text = option.label
+                //cell.textLabel!.text = option.label
+                cell.brandLabel.text = option.label
+              
+                var imageName = ""
+                if indexPath.section == 0 {
+                    if let imageName = Constants.ImageConstants.brandImages[option.value] {
+                        cell.brandImageView.image = UIImage(named: imageName)
+                        cell.brandLabel.hidden = true
+                        cell.brandImageView.hidden = false
+                    } else {
+                        //cell.brandImageView.image = UIImage(named: "cbrandsWhite")
+                        cell.brandLabel.hidden = false
+                        cell.brandImageView.hidden = true
+                    }
+                } else {
+                    cell.brandLabel.hidden = false
+                    cell.brandImageView.hidden = true
+                }
+                
+                
                 if option.selected {
                     cell.accessoryView = UIImageView(image: UIImage(named: "Check"))
                 } else {
                     cell.accessoryView = UIImageView(image: UIImage(named: "Uncheck"))
                 }
             } else {
-                cell.textLabel!.text = filter.options[filter.selectedIndex].label
+                cell.brandLabel.text = filter.options[filter.selectedIndex].label
                 cell.accessoryView = UIImageView(image: UIImage(named: "Dropdown"))
+                //cell.textLabel!.text = filter.options[filter.selectedIndex].label
+                
+                var imageName = ""
+                if indexPath.section == 0 {
+                    if let imageName = Constants.ImageConstants.brandImages[filter.options[filter.selectedIndex].value] {
+                        cell.brandImageView.image = UIImage(named: imageName)
+                        cell.brandLabel.hidden = true
+                        cell.brandImageView.hidden = false
+                    } else {
+                        //cell.brandImageView.image = UIImage(named: "cbrandsWhite")
+                        cell.brandLabel.hidden = false
+                        cell.brandImageView.hidden = true
+                    }
+                } else {
+                    cell.brandLabel.hidden = false
+                    cell.brandImageView.hidden = true
+                }
+                
             }
-        case .Multiple:
+       
+        /*
+case .Multiple:
             if filter.opened || indexPath.row < filter.numItemsVisible {
                 let option = filter.options[indexPath.row]
                 cell.textLabel!.text = option.label
@@ -121,9 +177,10 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                 cell.textLabel!.textAlignment = NSTextAlignment.Center
                 cell.textLabel!.textColor = .darkGrayColor()
             }
+*/
         default:
             let option = filter.options[indexPath.row]
-            cell.textLabel!.text = option.label
+            cell.brandLabel.text = option.label
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             let switchView = UISwitch(frame: CGRectZero)
             switchView.on = option.selected

@@ -50,6 +50,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
    
         mapView.delegate = self
         
@@ -121,7 +122,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if segue.identifier == "modalFilterSegue"
         {
             let navController = segue.destinationViewController as UINavigationController
-            let destVC = navController.viewControllers[0]  as FiltersTableViewController
+            //let destVC = navController.viewControllers[0]  as FiltersTableViewController
+            let destVC = navController.topViewController as FiltersTableViewController
+            
             destVC.delegate = self
         }
     }
@@ -314,7 +317,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func requestLocation() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
+    
+        // this is not supported in IOS 7, so check that that the selector exists
+        if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+
         self.locationManager.startUpdatingLocation()
     }
     

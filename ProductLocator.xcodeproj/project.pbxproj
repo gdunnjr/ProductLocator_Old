@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		640E78FDB4F24B57CE2AF0B6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1030D66D39E152D1AE084 /* libPods.a */; };
+		B83829051ACD5CB000E0A290 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83829041ACD5CB000E0A290 /* Constants.swift */; };
 		B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */; };
 		B86BD8F31AA0DEFB0033E64B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */; };
 		B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F41AA0DEFB0033E64B /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 		B86BD8FD1AA0DEFB0033E64B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8FB1AA0DEFB0033E64B /* LaunchScreen.xib */; };
 		B86BD9091AA0DEFB0033E64B /* ProductLocatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */; };
 		B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */; };
+		B8BE27031AC5D88400195646 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */; };
 		B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CF79FE1AA2247800795EB7 /* MapKit.framework */; };
 		B8D4A10A1AB50FB2009E570A /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4A1091AB50FB2009E570A /* AEXML.swift */; };
 		B8F1E9A41AA12B0500D467D0 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8F1E9A31AA12B0500D467D0 /* data.json */; };
@@ -34,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		77D1030D66D39E152D1AE084 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B83829041ACD5CB000E0A290 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FiltersTableViewController.swift; path = ../FiltersTableViewController.swift; sourceTree = "<group>"; };
 		B86BD8ED1AA0DEFB0033E64B /* ProductLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86BD8F11AA0DEFB0033E64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLocatorTests.swift; sourceTree = "<group>"; };
 		B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductLocatorFilters.swift; sourceTree = "<group>"; };
 		B8B44A231AA0E30600E0B7F8 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
+		B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		B8CF79FE1AA2247800795EB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B8D4A1091AB50FB2009E570A /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AEXML.swift; path = ../AEXML.swift; sourceTree = "<group>"; };
 		B8F1E9A31AA12B0500D467D0 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			children = (
 				B8D4A1091AB50FB2009E570A /* AEXML.swift */,
 				B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */,
+				B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */,
 				B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */,
 				B86BD8F41AA0DEFB0033E64B /* ViewController.swift */,
 				B86BD8F61AA0DEFB0033E64B /* Main.storyboard */,
@@ -128,6 +133,7 @@
 				B86BD8F01AA0DEFB0033E64B /* Supporting Files */,
 				B8F1E9A31AA12B0500D467D0 /* data.json */,
 				B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */,
+				B83829041ACD5CB000E0A290 /* Constants.swift */,
 			);
 			path = ProductLocator;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 				TargetAttributes = {
 					B86BD8EC1AA0DEFB0033E64B = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 6JR6497T4E;
 					};
 					B86BD9011AA0DEFB0033E64B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -297,6 +304,8 @@
 				B8D4A10A1AB50FB2009E570A /* AEXML.swift in Sources */,
 				B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */,
 				B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */,
+				B8BE27031AC5D88400195646 /* FilterTableViewCell.swift in Sources */,
+				B83829051ACD5CB000E0A290 /* Constants.swift in Sources */,
 				B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */,
 				B86BD8F31AA0DEFB0033E64B /* AppDelegate.swift in Sources */,
 			);
@@ -422,13 +431,16 @@
 			baseConfigurationReference = CFE3E51A2EDDECBF829BFB12 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ProductLocator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -437,13 +449,16 @@
 			baseConfigurationReference = F05773C246CB633BF681038F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ProductLocator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
