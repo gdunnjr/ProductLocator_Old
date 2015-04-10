@@ -24,6 +24,8 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
 
     @IBOutlet var customImageViewBrand: UIImageView!
     
+    
+    
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     override func viewDidLoad() {
@@ -47,7 +49,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
         
-        let searchButton = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "searchButtonTapped")
+        let searchButton = UIBarButtonItem(title: "Find", style: UIBarButtonItemStyle.Plain, target: self, action: "searchButtonTapped")
         
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = searchButton

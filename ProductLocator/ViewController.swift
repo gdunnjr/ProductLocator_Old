@@ -16,6 +16,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var brandVarietalLable: UILabel!
     
+    @IBOutlet weak var selectBrandButton: UIButton!
+    
+    
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
     var foundUserLocation = false
@@ -59,7 +62,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         brandVarietalLable.layer.cornerRadius = 10
         brandVarietalLable.layer.borderWidth = 0.5
         brandVarietalLable.layer.borderColor = UIColor.blueColor().CGColor
-        brandVarietalLable.text = " Filter: \n " + " " + brandVarietalLable.text!
+        brandVarietalLable.text = " " + brandVarietalLable.text!
         
         // Get the current location
         self.requestLocation()
@@ -309,7 +312,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y: 5)
-            view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoLight) as UIView
+            
+            let directionButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+            let directionIcon = UIImage(named: "113-navigation") as UIImage?
+            directionButton.frame = CGRectMake(0, 0, 32, 32)
+            directionButton.setImage(directionIcon, forState: UIControlState.Normal)
+            
+//            view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoLight) as UIView
+            view.rightCalloutAccessoryView = directionButton as UIView
         }
         return view
     }
@@ -447,7 +457,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         label = label.lowercaseString
         label = label.capitalizedString
         
-        brandVarietalLable.text = " Filter: \n" + " " + label
+        brandVarietalLable.text = " " + label
         
         //ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
         
@@ -501,6 +511,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         openAMapWithCoordinates(location.coordinate.latitude, theLon:location.coordinate.longitude, targetDesc:locationTargetDesc)
 
     }
+    
+    @IBAction func selectedBrandFilterTapped(sender: UIButton) {
+        println("ouch")
+        performSegueWithIdentifier("modalFilterSegue", sender: self)
+    }
+    
 }
 
 

@@ -130,10 +130,10 @@
 				B86BD8F61AA0DEFB0033E64B /* Main.storyboard */,
 				B86BD8F91AA0DEFB0033E64B /* Images.xcassets */,
 				B86BD8FB1AA0DEFB0033E64B /* LaunchScreen.xib */,
-				B86BD8F01AA0DEFB0033E64B /* Supporting Files */,
-				B8F1E9A31AA12B0500D467D0 /* data.json */,
 				B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */,
 				B83829041ACD5CB000E0A290 /* Constants.swift */,
+				B86BD8F01AA0DEFB0033E64B /* Supporting Files */,
+				B8F1E9A31AA12B0500D467D0 /* data.json */,
 			);
 			path = ProductLocator;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -458,7 +458,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

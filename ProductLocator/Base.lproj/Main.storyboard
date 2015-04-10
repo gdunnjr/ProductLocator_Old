@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Constellation Wine Finder-->
@@ -43,9 +44,19 @@
                                     <action selector="mapCurrentLocationPinTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="58O-kd-530"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woodbridge By Robert Mondavi - Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="ARj-fO-qB8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-Vi-WHL">
                                 <rect key="frame" x="10" y="108" width="300" height="34"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectedBrandFilterTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sYO-tq-8AB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Woodbridge By Robert Mondavi - Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="ARj-fO-qB8">
+                                <rect key="frame" x="10" y="108" width="300" height="34"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="67A-XV-9kQ"/>
                                 </constraints>
@@ -59,26 +70,45 @@
                             <constraint firstItem="ARj-fO-qB8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="0E3-cE-KWe"/>
                             <constraint firstAttribute="trailing" secondItem="CEF-mH-c2u" secondAttribute="trailing" constant="16" id="0Ib-gS-k1J"/>
                             <constraint firstAttribute="trailing" secondItem="CJf-6H-KdG" secondAttribute="trailing" constant="10" id="1Rb-y9-9vZ"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="27W-BU-9PI"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="leading" secondItem="b5c-pG-qGj" secondAttribute="trailing" constant="-310" id="2PD-nF-7gX"/>
                             <constraint firstItem="ARj-fO-qB8" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="41x-Y6-jcn"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="7f4-Fp-06c"/>
+                            <constraint firstAttribute="trailing" secondItem="Abb-Vi-WHL" secondAttribute="trailing" constant="10" id="AX8-QA-vA9"/>
                             <constraint firstAttribute="trailing" secondItem="b5c-pG-qGj" secondAttribute="trailing" id="C0N-zd-kZA"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="HrL-sQ-MuW"/>
                             <constraint firstItem="CJf-6H-KdG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="KFB-a4-Gbh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="b5c-pG-qGj" secondAttribute="bottom" id="N8k-Iv-pjQ"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="Nak-wg-SS0"/>
                             <constraint firstAttribute="trailing" secondItem="CEF-mH-c2u" secondAttribute="trailing" constant="15" id="bF7-Td-tg8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Abb-Vi-WHL" secondAttribute="trailing" constant="-6" id="bSs-7e-dAM"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-6" id="lB0-YX-Mfw"/>
                             <constraint firstAttribute="trailing" secondItem="ARj-fO-qB8" secondAttribute="trailing" constant="10" id="lrA-Yl-N0K"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pbm-PF-Moo"/>
                             <constraint firstItem="CJf-6H-KdG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="r7p-Ty-IXz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Abb-Vi-WHL" secondAttribute="trailing" constant="-6" id="wia-xt-euP"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="wjh-kQ-wMs"/>
+                            <constraint firstItem="Abb-Vi-WHL" firstAttribute="top" secondItem="CJf-6H-KdG" secondAttribute="bottom" constant="8" id="wtG-Cm-Fm9"/>
                             <constraint firstItem="b5c-pG-qGj" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="xjB-Ge-i7X"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="CEF-mH-c2u" secondAttribute="bottom" constant="20" id="zYp-8t-Bcg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="27W-BU-9PI"/>
+                                <exclude reference="2PD-nF-7gX"/>
+                                <exclude reference="HrL-sQ-MuW"/>
+                                <exclude reference="bSs-7e-dAM"/>
+                                <exclude reference="lB0-YX-Mfw"/>
+                                <exclude reference="wia-xt-euP"/>
+                                <exclude reference="wjh-kQ-wMs"/>
+                                <exclude reference="wtG-Cm-Fm9"/>
                                 <exclude reference="0Ib-gS-k1J"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Constellation Wine Finder" id="TzL-Tr-9Ad">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="ObL-Gv-UgQ"/>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="lW8-x3-wno">
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="lW8-x3-wno">
                             <connections>
                                 <segue destination="uCy-dr-YjK" kind="presentation" identifier="modalFilterSegue" id="f9Y-tK-1gK"/>
                             </connections>
@@ -89,6 +119,7 @@
                     <connections>
                         <outlet property="brandVarietalLable" destination="ARj-fO-qB8" id="Dao-I0-0s0"/>
                         <outlet property="mapView" destination="b5c-pG-qGj" id="llk-Zg-X85"/>
+                        <outlet property="selectBrandButton" destination="Abb-Vi-WHL" id="nhu-dI-NXf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
