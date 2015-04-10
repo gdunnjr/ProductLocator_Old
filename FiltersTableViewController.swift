@@ -31,9 +31,9 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.rowHeight = 44.0
+        self.tableView.rowHeight = 90.0
         if !Constants.IOSVersionConstants.less_than_iOS_8{
-            self.tableView.rowHeight = UITableViewAutomaticDimension
+       //     self.tableView.rowHeight = UITableViewAutomaticDimension
         }
         
         //self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -93,7 +93,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let filter = self.model!.filters[section]
-        let label = filter.label
+        let label = filter.label.lowercaseString.capitalizedString
         
         // Add the number of selected options for multiple-select filters with hidden options
         if filter.type == .Multiple && filter.numItemsVisible > 0 && filter.numItemsVisible < filter.options.count && !filter.opened {
@@ -117,7 +117,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
             if filter.opened {
                 let option = filter.options[indexPath.row]
                 //cell.textLabel!.text = option.label
-                cell.brandLabel.text = option.label
+                cell.brandLabel.text = option.label.lowercaseString.capitalizedString
               
                 var imageName = ""
                 if indexPath.section == 0 {
@@ -142,7 +142,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                     cell.accessoryView = UIImageView(image: UIImage(named: "Uncheck"))
                 }
             } else {
-                cell.brandLabel.text = filter.options[filter.selectedIndex].label
+                cell.brandLabel.text = filter.options[filter.selectedIndex].label.lowercaseString.capitalizedString
                 cell.accessoryView = UIImageView(image: UIImage(named: "Dropdown"))
                 //cell.textLabel!.text = filter.options[filter.selectedIndex].label
                 
@@ -182,7 +182,7 @@ case .Multiple:
 */
         default:
             let option = filter.options[indexPath.row]
-            cell.brandLabel.text = option.label
+            cell.brandLabel.text = option.label.lowercaseString.capitalizedString
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             let switchView = UISwitch(frame: CGRectZero)
             switchView.on = option.selected
