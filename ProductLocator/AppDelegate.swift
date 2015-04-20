@@ -13,20 +13,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-   // var locationManager: CLLocationManager?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]!) -> Bool {
-        
-       //locationManager = CLLocationManager()
-      //  locationManager?.requestWhenInUseAuthorization()
-
-       // let center = locationManager?.location.coordinate
-      //  self.userLocation.location.coordinate
-       // println(center!.latitude)
-       // println(center!.longitude)
-        
-        //NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
+        NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
 
         
         // Override point for customization after application launch.

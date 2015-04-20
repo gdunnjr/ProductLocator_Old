@@ -14,29 +14,19 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     var model: ProductLocatorFilters?
     
     // variables for parsing the varietals xml
-    //var parser = NSXMLParser()
     var elements = NSMutableDictionary()
     var element = NSString()
     var varietalBlendCd = NSMutableString()
     var varietalBlendDsc = NSMutableString()
     
     @IBOutlet var customImageView: UIImageView!
-
     @IBOutlet var customImageViewBrand: UIImageView!
-    
-    
-    
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = 90.0
-        if !Constants.IOSVersionConstants.less_than_iOS_8{
-       //     self.tableView.rowHeight = UITableViewAutomaticDimension
-        }
-        
-        //self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // Create a new instance of the model for this "session"
         self.model = ProductLocatorFilters(instance: ProductLocatorFilters.instance)
@@ -46,21 +36,10 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
             getBrands()
         }
 
-        
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
-        
         let searchButton = UIBarButtonItem(title: "Find", style: UIBarButtonItemStyle.Plain, target: self, action: "searchButtonTapped")
-        
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = searchButton
-        
-        
-        // force it to reload - simple way
-        //tableView.reloadData()
-        
-        // reload a section of the table
-        //tableView.reloadSections(<#sections: NSIndexSet#>, withRowAnimation: <#UITableViewRowAnimation#>)
-        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -105,10 +84,6 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
-        //let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("filterTableViewCellIdentifier") as FilterTableViewCell
         
         let filter = self.model!.filters[indexPath.section] as Filter
@@ -163,9 +138,8 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                 }
                 
             }
-       
-        /*
-case .Multiple:
+        
+        case .Multiple:
             if filter.opened || indexPath.row < filter.numItemsVisible {
                 let option = filter.options[indexPath.row]
                 cell.textLabel!.text = option.label
@@ -179,7 +153,7 @@ case .Multiple:
                 cell.textLabel!.textAlignment = NSTextAlignment.Center
                 cell.textLabel!.textColor = .darkGrayColor()
             }
-*/
+
         default:
             let option = filter.options[indexPath.row]
             cell.brandLabel.text = option.label.lowercaseString.capitalizedString
@@ -207,7 +181,7 @@ case .Multiple:
                     let previousIndexPath = NSIndexPath(forRow: previousIndex, inSection: indexPath.section)
                     self.tableView.reloadRowsAtIndexPaths([indexPath, previousIndexPath], withRowAnimation: .Automatic)
                 
-                    println(indexPath.section)
+                    //println(indexPath.section)
                     if indexPath.section == 0 {
                         reloadVarietals = true
                     }
@@ -227,7 +201,6 @@ case .Multiple:
                 self.tableView.reloadSections(NSMutableIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
             }
  
-
         case .Multiple:
             if !filter.opened && indexPath.row == filter.numItemsVisible {
                 filter.opened = true
@@ -245,11 +218,6 @@ case .Multiple:
             getVarietals(filter.options[indexPath.row].value)
         }
  
-    }
-        
-    // this override is necessary to properly position the nav bar at the top
-    func positionForBar(bar: UIBarPositioning!) -> UIBarPosition {
-        return UIBarPosition.TopAttached
     }
     
     func searchButtonTapped() {
@@ -274,12 +242,12 @@ case .Multiple:
             if !varietalBlendCd.isEqual(nil) {
                 //elements.setObject(title1, forKey: "varietalBlendCd")
                 varCd = varietalBlendCd as String
-                println(varCd)
+                //println(varCd)
             }
             if !varietalBlendDsc.isEqual(nil) {
                 //elements.setObject(title1, forKey: "varietalBlendCd")
                 varDsc = varietalBlendDsc as String
-                println(varDsc)
+                //println(varDsc)
             }
             
             // add it
@@ -305,7 +273,6 @@ case .Multiple:
   
     func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
         element = elementName
-
         
         if (elementName as NSString).isEqualToString("plBrandDetails")
         {
@@ -327,7 +294,6 @@ case .Multiple:
         }
     }
  
- 
     func getVarietals(brandCode: String)
     {
 
@@ -347,11 +313,7 @@ case .Multiple:
                 xmlParser.delegate = self
                 xmlParser.parse()
                 self.model!.filters[1].options[0].selected = true
-                
-                //self.tableView.reloadSections(NSMutableIndexSet(index: 1), withRowAnimation: .Automatic)
-                
                 self.model!.filters[1].options.sort { $0.label < $1.label }
-                
                 self.tableView.reloadData()
                 
             },
@@ -361,10 +323,8 @@ case .Multiple:
         //println("in varietal sort...")
     }
 
-    
     func getBrands()
     {
-        
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
@@ -401,12 +361,12 @@ case .Multiple:
                             for index in 0...brands.count-1 {
                                 if let tmpBrandCd = brands[index]["brandCd"] as? String {
                                     brandCd = tmpBrandCd
-                                    println(brandCd)
+                                    //println(brandCd)
                                 }
                                 
                                 if let tmpBrandDsc = brands[index]["brandDsc"] as? String {
                                     brandDsc = tmpBrandDsc
-                                    println(brandDsc)
+                                    //println(brandDsc)
                                 }
                                 
                                 // add it

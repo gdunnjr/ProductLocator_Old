@@ -71,9 +71,6 @@ class ProductLocatorFilters {
                     newOptions.append(instance.filters[f].options[o])
                 }
             self.filters[f].options = newOptions
-    //        for var o = 0; o < self.filters[f].options.count; o++ {
-    //            self.filters[f].options[o].selected = instance.filters[f].options[o].selected
-    //        }
         }
     }
     

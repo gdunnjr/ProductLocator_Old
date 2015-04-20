@@ -13,14 +13,7 @@ import AddressBook
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    //@IBOutlet weak var brandVarietalLable: UILabel!
-    
-    @IBOutlet weak var selectBrandButton: UIButton!
-    
     @IBOutlet weak var brandLabel: UILabel!
-    
-    
     @IBOutlet weak var varietalLabel: UILabel!
     
     var locationManager: CLLocationManager = CLLocationManager()
@@ -28,7 +21,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var foundUserLocation = false
     var droppingPins = false
 
-    // these will hold current location, set some defaults justin case
+    // these will hold current location - set a default
     var latitude: Double = 37.7710347
     var longitude: Double = -122.4040795
     
@@ -56,23 +49,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
    
         mapView.delegate = self
-        
-        // round the corners on the label and add a border
-        //brandVarietalLable.layer.masksToBounds = true
-        //brandVarietalLable.layer.cornerRadius = 10
-        //brandVarietalLable.layer.borderWidth = 0.5
-        //brandVarietalLable.layer.borderColor = UIColor.blueColor().CGColor
-        //brandVarietalLable.text = " " + brandVarietalLable.text!
         
         // Get the current location
         self.requestLocation()
         
-       
-        // Code to get the bounding box of the visible map area
+        // Code to get the bounding box of the visible map area - Future
         /*
         var getLat: CLLocationDegrees = mapView.centerCoordinate.latitude
         var getLng: CLLocationDegrees = mapView.centerCoordinate.longitude
@@ -84,44 +67,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // array to hold map pins
         self.annotations = []
-        
-        // Example of how to read json from a file
-        let filePath = NSBundle.mainBundle().pathForResource("data",ofType:"json")
-        var readError:NSError?
-        if let data = NSData(contentsOfFile:filePath!, options:NSDataReadingOptions.DataReadingUncached, error:&readError) {
-            var jsonErrorOptional: NSError?
-            if let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: nil, error:&jsonErrorOptional) as? NSDictionary {
-                if let tmpStoreName = jsonResult["store_dsc"] as? String {
-                    let myStoreName = tmpStoreName
-                    println(myStoreName)
-                }
-                if let tmpStoreAddress = jsonResult["address"] as? String {
-                    let myStoreAddress = tmpStoreAddress
-                    println(myStoreAddress)
-                }
-            }
-        }
-        
-        //getStore()
-        //getStores()
-        
-        // Code to add array of annotation map pins
-        //self.mapView.addAnnotations(self.annotations)
-        
-        
-        /* Code to drop map pins
-        self.annotations = []
-        for business in results {
-        let annotation = MKPointAnnotation()
-        let coordinate = CLLocationCoordinate2D(latitude: business.latitude!, longitude: business.longitude!)
-        annotation.setCoordinate(coordinate)
-        annotation.title = business.name
-        annotation.subtitle = business.displayCategories
-        self.annotations.append(annotation)
-        }
-        self.mapView.addAnnotations(self.annotations)
-        */
-        
     }
     
     
@@ -149,12 +94,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.view.addSubview( activityIndicator )
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
-        
         let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
         
-        println(self.latitude)
-        println(self.longitude)
-        
+        //println(self.latitude)
+        //println(self.longitude)
         
         let manager = AFHTTPRequestOperationManager()
         manager.GET( baseURL,
@@ -232,71 +175,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         })
 
         droppingPins = false
-
-
-    }
-
-    func getStore()
-    {
-        
-        let manager = AFHTTPRequestOperationManager()
-        
-        let storeEndpointURL = "https://cbi-api-test.herokuapp.com/v2/stores/5110665?apiKey=1&signature=Ydz7LTPUq2gVAE/WobrHnpSLNh1WtyVfcWOHu3exR3w="
-        // read store from the heroku endpoint
-        manager.GET( storeEndpointURL,
-            parameters: nil,
-            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                println("JSON: " + String(responseObject.description))
-                
-                var storeName = ""
-                var storeAddress = ""
-                var storeState = ""
-                var storeZip = ""
-                var storePhone = ""
-                var storeLat : Double = 0.00
-                var storeLng : Double = 0.00
-                // Parsing without Swift Library
-                if let productLocation = responseObject[0] as? NSDictionary {
-                    if let tmpStoreName = productLocation["store_dsc"] as? String {
-                        storeName = tmpStoreName
-                    }
-                    if let tmpStoreAddress = productLocation["address"] as? String {
-                        storeAddress = tmpStoreAddress
-                    }
-                    if let tmpStoreState = productLocation["state"] as? String {
-                        storeState = tmpStoreState
-                    }
-                    if let tmpStoreZip = productLocation["postal_cd"] as? String {
-                        storeZip = tmpStoreZip
-                    }
-                    if let tmpStorePhone = productLocation["phone_no"] as? String {
-                        storePhone = tmpStorePhone
-                    }
-                    if let tmpStoreLat = productLocation["latitude"] as? Double {
-                        storeLat = tmpStoreLat
-                    }
-                    if let tmpStoreLng = productLocation["longitude"] as? Double {
-                        storeLng = tmpStoreLng
-                    }
-                    
-                    let annotation = MKPointAnnotation()
-                    let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
-                  
-             
-                    
-                    annotation.setCoordinate(coordinate)
-                    annotation.title = storeName
-                    annotation.subtitle = storeAddress
-                    //self.annotations.append(annotation)
-                    self.mapView.addAnnotation(annotation)
-                    
-                }
-
-            },
-            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-                println("Error: " + error.localizedDescription)
-        })
-
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -308,11 +186,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let identifier = "pin"
         var view: MKPinAnnotationView
         if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-            as? MKPinAnnotationView { // 2
+            as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
         } else {
-            // 3
+            
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y: 5)
@@ -322,7 +200,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             directionButton.frame = CGRectMake(0, 0, 32, 32)
             directionButton.setImage(directionIcon, forState: UIControlState.Normal)
             
-//            view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.InfoLight) as UIView
             view.rightCalloutAccessoryView = directionButton as UIView
         }
         return view
@@ -350,9 +227,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             self.locationManager.stopUpdatingLocation()
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(60.0 * Double(NSEC_PER_SEC)))
-            //dispatch_after(time, dispatch_get_main_queue(), {
-            //    self.locationManager.startUpdatingLocation()
-            //})
         }
 
     }
@@ -368,12 +242,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
             
             self.latitude = center.latitude
-            
             self.longitude = center.longitude
             
             foundUserLocation = true
             
-            // this is crashing
             //centerMapByMiles(15)
             
         }
@@ -390,41 +262,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    
     func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
         
         if !foundUserLocation {
             return
         }
-        println("New Location: ")
-       // println(userLocation)
         
         let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
         
-        println("new center")
-        println(newLoc.latitude)
-        println(newLoc.longitude)
+        //println("new center")
+        //println(newLoc.latitude)
+        //println(newLoc.longitude)
         
         self.latitude = newLoc.latitude
         self.longitude = newLoc.longitude
         
         getStores()
         
-        /*
-        // Not getting called
-        if let loc = userLocation {
-        getProductLocations(userLocation.coordinate)
-        }
-        let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
-        
-        var annotation = MKPointAnnotation()
-        annotation.setCoordinate(newLoc)
-        annotation.title = "Yo"
-        annotation.subtitle = "Yo"
-        self.mapView.addAnnotation(annotation)
-        
-        getProductLocations(newLoc)
-        */
     }
  
     
@@ -450,23 +304,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     final func onFiltersDone(controller: FiltersTableViewController) {
-        //let brandFilterObj = ProductLocatorFilters.instance.filters[0] as Filter
-        println(ProductLocatorFilters.instance.filters[0].selectedOptions[0].label)
-        println(ProductLocatorFilters.instance.filters[1].selectedOptions[0].label)
-        
         brandCdFilter=ProductLocatorFilters.instance.filters[0].selectedOptions[0].value
         varietalCdFilter=ProductLocatorFilters.instance.filters[1].selectedOptions[0].value
-        
-        var label = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
-        label = label.lowercaseString
-        label = label.capitalizedString
-        
-        //brandVarietalLable.text = " " + label
-        
+
         brandLabel.text = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label.lowercaseString.capitalizedString
         varietalLabel.text = ProductLocatorFilters.instance.filters[1].selectedOptions[0].label.lowercaseString.capitalizedString
-        
-        //ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
         
         mapView.removeAnnotations(mapView.annotations)
         getStores()
@@ -506,7 +348,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
     
-    
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
         calloutAccessoryControlTapped control: UIControl!) {
         let location = view.annotation
@@ -517,11 +358,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         openAMapWithCoordinates(location.coordinate.latitude, theLon:location.coordinate.longitude, targetDesc:locationTargetDesc)
 
-    }
-    
-    @IBAction func selectedBrandFilterTapped(sender: UIButton) {
-        println("ouch")
-        performSegueWithIdentifier("modalFilterSegue", sender: self)
     }
     
 }
