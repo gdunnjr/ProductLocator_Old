@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526">
+            startingLineNumber = "533"
+            endingLineNumber = "533">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,11 +128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549">
+            startingLineNumber = "556"
+            endingLineNumber = "556">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,11 +142,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532">
+            startingLineNumber = "539"
+            endingLineNumber = "539">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -156,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "577"
-            endingLineNumber = "577">
+            startingLineNumber = "584"
+            endingLineNumber = "584">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,35 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "553"
-            endingLineNumber = "553">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "560"
@@ -208,15 +180,43 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ProductLocator/ViewController.swift"
+            timestampString = "451235058.154822"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "571"
+            endingLineNumber = "571">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ProductLocator/ViewController.swift"
+            timestampString = "451235058.154822"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "567"
+            endingLineNumber = "567">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "mapView(_:regionDidChangeAnimated:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -228,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "449754978.398813"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "getStore()"
             landmarkType = "5">
             <Locations>
@@ -243,11 +243,11 @@
                   symbolName = "ProductLocator.ViewController.getStore (ProductLocator.ViewController)() -&gt; ()"
                   moduleName = "ProductLocator"
                   urlString = "file:///Users/geralddunn/Desktop/Thinkful/ProductLocator/ProductLocator/ViewController.swift"
-                  timestampString = "450361353.058773"
+                  timestampString = "451236647.899521"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "244"
-                  endingLineNumber = "244"
+                  startingLineNumber = "248"
+                  endingLineNumber = "248"
                   offsetFromSymbolStart = "497">
                </Location>
                <Location
@@ -257,11 +257,11 @@
                   symbolName = "ProductLocator.ViewController.(getStore (ProductLocator.ViewController) -&gt; () -&gt; ()).(closure #1)"
                   moduleName = "ProductLocator"
                   urlString = "file:///Users/geralddunn/Desktop/Thinkful/ProductLocator/ProductLocator/ViewController.swift"
-                  timestampString = "450361353.059027"
+                  timestampString = "451236647.899782"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "245"
-                  endingLineNumber = "245"
+                  startingLineNumber = "249"
+                  endingLineNumber = "249"
                   offsetFromSymbolStart = "55">
                </Location>
             </Locations>
@@ -274,11 +274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "449754978.398813"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "getStore()"
             landmarkType = "5">
          </BreakpointContent>
@@ -290,11 +290,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "492"
-            endingLineNumber = "492"
+            startingLineNumber = "499"
+            endingLineNumber = "499"
             landmarkName = "openAMapWithCoordinates(_:theLon:targetDesc:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -306,11 +306,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -418,11 +418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "453"
+            endingLineNumber = "453"
             landmarkName = "onFiltersDone(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -434,11 +434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProductLocator/ViewController.swift"
-            timestampString = "450204416.924897"
+            timestampString = "451235058.154822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "onFiltersDone(_:)"
             landmarkType = "5">
             <Locations>

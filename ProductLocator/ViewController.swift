@@ -14,10 +14,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBOutlet weak var brandVarietalLable: UILabel!
+    //@IBOutlet weak var brandVarietalLable: UILabel!
     
     @IBOutlet weak var selectBrandButton: UIButton!
     
+    @IBOutlet weak var brandLabel: UILabel!
+    
+    
+    @IBOutlet weak var varietalLabel: UILabel!
     
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
@@ -58,11 +62,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.delegate = self
         
         // round the corners on the label and add a border
-        brandVarietalLable.layer.masksToBounds = true
-        brandVarietalLable.layer.cornerRadius = 10
-        brandVarietalLable.layer.borderWidth = 0.5
-        brandVarietalLable.layer.borderColor = UIColor.blueColor().CGColor
-        brandVarietalLable.text = " " + brandVarietalLable.text!
+        //brandVarietalLable.layer.masksToBounds = true
+        //brandVarietalLable.layer.cornerRadius = 10
+        //brandVarietalLable.layer.borderWidth = 0.5
+        //brandVarietalLable.layer.borderColor = UIColor.blueColor().CGColor
+        //brandVarietalLable.text = " " + brandVarietalLable.text!
         
         // Get the current location
         self.requestLocation()
@@ -457,7 +461,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         label = label.lowercaseString
         label = label.capitalizedString
         
-        brandVarietalLable.text = " " + label
+        //brandVarietalLable.text = " " + label
+        
+        brandLabel.text = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label.lowercaseString.capitalizedString
+        varietalLabel.text = ProductLocatorFilters.instance.filters[1].selectedOptions[0].label.lowercaseString.capitalizedString
         
         //ProductLocatorFilters.instance.filters[0].selectedOptions[0].label + " - " + ProductLocatorFilters.instance.filters[1].selectedOptions[0].label
         
