@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 //import CoreLocation
 
 @UIApplicationMain
@@ -15,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]!) -> Bool {
-        NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
+        
+        //NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
+        NewRelic.startWithApplicationToken("AA1184372f51534d9dab2c0d7b117170270f66729b")
+        
+        Crashlytics.startWithAPIKey("ad87b323e7785261ee3e333b499b665e0477e462")
 
         
         // Override point for customization after application launch.

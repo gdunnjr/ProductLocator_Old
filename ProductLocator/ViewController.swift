@@ -94,7 +94,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.view.addSubview( activityIndicator )
         
         let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
-        let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=ldtst&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
+        let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=\(Constants.APIConstants.APIKey)&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
         
         //println(self.latitude)
         //println(self.longitude)
@@ -172,6 +172,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
+                self.activityIndicator.stopAnimating()
+                
         })
 
         droppingPins = false
@@ -262,8 +264,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
-        
+    //func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
+    {
         if !foundUserLocation {
             return
         }

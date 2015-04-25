@@ -17,6 +17,10 @@ class Constants {
         static let less_than_iOS_8 = (UIDevice.currentDevice().systemVersion as NSString).floatValue < 8.0 ? true : false
     }
     
+    struct APIConstants {
+        static let APIKey = "productlocatorios"
+    }
+    
     struct ImageConstants {
         static let brandImages = [
             "859": "anderra",

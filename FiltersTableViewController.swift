@@ -297,7 +297,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     func getVarietals(brandCode: String)
     {
 
-        let baseURL = "https://api.cbrands.com/pl/brand/\(brandCode)?apiKey=ldtst"
+        let baseURL = "https://api.cbrands.com/pl/brand/\(brandCode)?apiKey=\(Constants.APIConstants.APIKey)"
         
         let manager = AFHTTPRequestOperationManager()
         let xmlSerializer = AFXMLParserResponseSerializer()
@@ -330,7 +330,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         activityIndicator.center = self.view.center
         self.view.addSubview( activityIndicator )
         
-        let baseURL = "https://api.cbrands.com/pl/brands.json?apiKey=ldtst"
+        let baseURL = "https://api.cbrands.com/pl/brands.json?apiKey=\(Constants.APIConstants.APIKey)"
        
         let manager = AFHTTPRequestOperationManager()
         manager.GET( baseURL,
