@@ -8,3 +8,4 @@
 
 #import "AFNetworking.h"
 #import "NewRelicAgent/NewRelic.h"
+#import "GoogleMaps/GoogleMaps.h"

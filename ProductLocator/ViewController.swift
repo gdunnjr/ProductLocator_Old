@@ -12,9 +12,18 @@ import AddressBook
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
+    //@IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var varietalLabel: UILabel!
+    
+    
+    @IBOutlet weak var viewMap: GMSMapView!
+  
+    //var locationManager = CLLocationManager()
+    
+    var didFindMyLocation = false
+    
+    var locationMarker: GMSMarker!
     
     var locationManager: CLLocationManager = CLLocationManager()
     var annotations: Array<MKPointAnnotation>!
@@ -50,10 +59,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
    
-        mapView.delegate = self
+        //mapView.delegate = self
         
         // Get the current location
         self.requestLocation()
+        
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 8.0)
+        viewMap.camera = camera
+        
+        locationManager.delegate = self
+        // this is not supported in IOS 7, so check that that the selector exists
+        if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        //self.locationManager.startUpdatingLocation()
+
         
         // Code to get the bounding box of the visible map area - Future
         /*
@@ -69,6 +89,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.annotations = []
     }
     
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if !didFindMyLocation {
+            let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
+            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            viewMap.settings.myLocationButton = true
+            
+            didFindMyLocation = true
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            viewMap.myLocationEnabled = true
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "modalFilterSegue"
@@ -80,7 +115,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             destVC.delegate = self
         }
     }
-
     
     func getStores()
     {
@@ -92,8 +126,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
         self.view.addSubview( activityIndicator )
-        
-        let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
+       
+        //TODO replace with google map call
+        //let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
+      
         let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=\(Constants.APIConstants.APIKey)&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
         
         //println(self.latitude)
@@ -158,8 +194,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                                     annotation.setCoordinate(coordinate)
                                     annotation.title = storeName
                                     annotation.subtitle = storeAddress + " " + storeCity
-                                    //self.annotations.append(annotation)
-                                    self.mapView.addAnnotation(annotation)
+                                    
+                                    
+                                    self.locationMarker = GMSMarker(position: coordinate)
+                                    self.locationMarker.map = self.viewMap
+                                    
+                                    self.locationMarker.title = storeName
+                                    self.locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                                    self.locationMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+                                    self.locationMarker.opacity = 0.75
+                                    
+                                    //self.locationMarker.flat = true
+                                    self.locationMarker.snippet = storeAddress + " " + storeCity
+                                    
+                                    
+                                    //TODO replace with google map call
+                                    //self.mapView.addAnnotation(annotation)
                                     
                                 }
                                 lastStore = ((prodLocs[index]["storeName"]) as String)
@@ -179,33 +229,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         droppingPins = false
     }
 
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        if annotation is MKUserLocation {
-            //return nil so map view draws "blue dot" for standard user location
-            return nil
-        }
-        
-        let identifier = "pin"
-        var view: MKPinAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-            as? MKPinAnnotationView {
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-        } else {
-            
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = true
-            view.calloutOffset = CGPoint(x: -5, y: 5)
-            
-            let directionButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
-            let directionIcon = UIImage(named: "113-navigation") as UIImage?
-            directionButton.frame = CGRectMake(0, 0, 32, 32)
-            directionButton.setImage(directionIcon, forState: UIControlState.Normal)
-            
-            view.rightCalloutAccessoryView = directionButton as UIView
-        }
-        return view
-    }
+//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+//        if annotation is MKUserLocation {
+//            //return nil so map view draws "blue dot" for standard user location
+//            return nil
+//        }
+//        
+//        let identifier = "pin"
+//        var view: MKPinAnnotationView
+//        if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+//            as? MKPinAnnotationView {
+//                dequeuedView.annotation = annotation
+//                view = dequeuedView
+//        } else {
+//            
+//            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//            view.canShowCallout = true
+//            view.calloutOffset = CGPoint(x: -5, y: 5)
+//            
+//            let directionButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+//            let directionIcon = UIImage(named: "113-navigation") as UIImage?
+//            directionButton.frame = CGRectMake(0, 0, 32, 32)
+//            directionButton.setImage(directionIcon, forState: UIControlState.Normal)
+//            
+//            view.rightCalloutAccessoryView = directionButton as UIView
+//        }
+//        return view
+//    }
     
     func requestLocation() {
         self.locationManager.delegate = self
@@ -241,7 +291,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let center = self.location.coordinate
             
             let span = MKCoordinateSpanMake(0.5, 0.5)
-            self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
+            
+            //TODO replace with google map call
+            //self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
+            
+            viewMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 11, bearing: 0, viewingAngle: 0)
             
             self.latitude = center.latitude
             self.longitude = center.longitude
@@ -264,47 +318,55 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    //func mapView(mapView: MKMapView!, regionDidChangeAnimated userLocation: MKUserLocation!) {
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
-    {
-        if !foundUserLocation {
-            return
-        }
-        
-        let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
-        
-        //println("new center")
-        //println(newLoc.latitude)
-        //println(newLoc.longitude)
-        
-        self.latitude = newLoc.latitude
-        self.longitude = newLoc.longitude
-        
-        getStores()
-        
-    }
+//TODO replace with google map call
+//    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
+//    {
+//        if !foundUserLocation {
+//            return
+//        }
+//        
+//        let newLoc : CLLocationCoordinate2D  = mapView.centerCoordinate
+//        
+//        //println("new center")
+//        //println(newLoc.latitude)
+//        //println(newLoc.longitude)
+//        
+//        self.latitude = newLoc.latitude
+//        self.longitude = newLoc.longitude
+//        
+//        getStores()
+//        
+//    }
  
     
-    func centerMapByMiles(miles: Double) {
-        var location = mapView.centerCoordinate
-        var span = MKCoordinateSpanMake(0.1, 0.1)
-        var region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-        
-        //let miles = 15.0;
-        var scalingFactor =  (cos(2 * M_PI * location.latitude / 360.0) );
-        if scalingFactor < 0 {
-            scalingFactor = scalingFactor * (-1)
-        }
-        var mySpan = MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
-        
-        mySpan.latitudeDelta = miles/69.0;
-        mySpan.longitudeDelta = miles/(scalingFactor * 69.0);
-        
-        var myRegion = MKCoordinateRegion(center: location, span: mySpan)
-        
-        mapView.setRegion(myRegion, animated: true)
-    }
+// TODO - rewrite for google maps
+//    func centerMapByMiles(miles: Double) {
+//        //TODO replace with google map call
+//        //var location = mapView.centerCoordinate
+//        
+//        
+//        var span = MKCoordinateSpanMake(0.1, 0.1)
+//        var region = MKCoordinateRegion(center: location, span: span)
+//        
+//        //TODO replace with google map call
+//        //mapView.setRegion(region, animated: true)
+//        
+//        //let miles = 15.0;
+//        var scalingFactor =  (cos(2 * M_PI * location.latitude / 360.0) );
+//        if scalingFactor < 0 {
+//            scalingFactor = scalingFactor * (-1)
+//        }
+//        var mySpan = MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
+//        
+//        mySpan.latitudeDelta = miles/69.0;
+//        mySpan.longitudeDelta = miles/(scalingFactor * 69.0);
+//        
+//        var myRegion = MKCoordinateRegion(center: location, span: mySpan)
+//        
+//        //TODO replace with google map call
+//        //mapView.setRegion(myRegion, animated: true)
+//        
+//    }
     
     final func onFiltersDone(controller: FiltersTableViewController) {
         brandCdFilter=ProductLocatorFilters.instance.filters[0].selectedOptions[0].value
@@ -313,7 +375,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         brandLabel.text = ProductLocatorFilters.instance.filters[0].selectedOptions[0].label.lowercaseString.capitalizedString
         varietalLabel.text = ProductLocatorFilters.instance.filters[1].selectedOptions[0].label.lowercaseString.capitalizedString
         
-        mapView.removeAnnotations(mapView.annotations)
+        //TODO replace with google map call
+        //mapView.removeAnnotations(mapView.annotations)
+        
         getStores()
         
     }
@@ -329,12 +393,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         {
             premiseType = premise.OnPremise
         }
-        mapView.removeAnnotations(mapView.annotations)
+        
+        //TODO replace with google map call
+        //mapView.removeAnnotations(mapView.annotations)
+        
         getStores()
     }
     
     @IBAction func mapCurrentLocationPinTapped(sender: AnyObject) {
-        mapView.removeAnnotations(mapView.annotations)
+        
+        //TODO replace with google map call
+        //mapView.removeAnnotations(mapView.annotations)
+        
         foundUserLocation = false
         requestLocation()
     }
@@ -350,18 +420,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
         MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
     }
-    
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
-        calloutAccessoryControlTapped control: UIControl!) {
-        let location = view.annotation
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-        let lat: Double = location.coordinate.latitude
-        let lng: Double = location.coordinate.longitude
-        let locationTargetDesc:String = location.title! + " " + location.subtitle!
-        
-        openAMapWithCoordinates(location.coordinate.latitude, theLon:location.coordinate.longitude, targetDesc:locationTargetDesc)
 
-    }
+// TODO - rewrite for google maps
+//    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
+//        calloutAccessoryControlTapped control: UIControl!) {
+//        let location = view.annotation
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+//        let lat: Double = location.coordinate.latitude
+//        let lng: Double = location.coordinate.longitude
+//        let locationTargetDesc:String = location.title! + " " + location.subtitle!
+//        
+//        openAMapWithCoordinates(location.coordinate.latitude, theLon:location.coordinate.longitude, targetDesc:locationTargetDesc)
+//
+//    }
     
 }
 

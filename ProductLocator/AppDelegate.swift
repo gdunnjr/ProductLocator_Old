@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Crashlytics
+//import Crashlytics
 //import CoreLocation
 
 @UIApplicationMain
@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //NewRelic.startWithApplicationToken("AAdef3b0d89c0adaa25b5346e42c7902e532053e26")
         NewRelic.startWithApplicationToken("AA1184372f51534d9dab2c0d7b117170270f66729b")
         
-        Crashlytics.startWithAPIKey("ad87b323e7785261ee3e333b499b665e0477e462")
+//        Crashlytics.startWithAPIKey("ad87b323e7785261ee3e333b499b665e0477e462")
 
         
+           GMSServices.provideAPIKey("AIzaSyD9AmBibBYGmgVH0R44AN9wtFvKnn6-9h0")
         // Override point for customization after application launch.
         return true
     }
