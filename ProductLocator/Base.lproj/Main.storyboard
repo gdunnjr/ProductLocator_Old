@@ -18,16 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CJf-6H-KdG">
-                                <rect key="frame" x="10" y="72" width="300" height="29"/>
-                                <segments>
-                                    <segment title="On Premise Locations"/>
-                                    <segment title="Off Premise Locations"/>
-                                </segments>
-                                <connections>
-                                    <action selector="premiseBarAction:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Ove-dg-FWx"/>
-                                </connections>
-                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMv-gb-4q9" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="vbc-4t-g6a"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vbc-4t-g6a"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="8Ou-xH-Iln">
+                                <rect key="frame" x="62" y="525" width="204" height="23"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="KUN-4j-IBv"/>
+                                    <constraint firstAttribute="height" constant="34" id="Mxs-O9-8bT"/>
+                                    <constraint firstAttribute="height" constant="23" id="SJD-Zp-TUv"/>
+                                    <constraint firstAttribute="width" constant="261" id="qEY-TP-jnz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KUN-4j-IBv"/>
+                                        <exclude reference="Mxs-O9-8bT"/>
+                                        <exclude reference="qEY-TP-jnz"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Brand:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="srN-6Z-vHp">
+                                <rect key="frame" x="16" y="504" width="45" height="23"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="1hg-WX-zi3"/>
+                                    <constraint firstAttribute="height" constant="23" id="75c-yH-VRX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="D6g-6w-A9Z"/>
+                                    <constraint firstAttribute="height" constant="34" id="MV2-kN-5mL"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="UBA-u9-WMz"/>
+                                    <constraint firstAttribute="width" constant="261" id="Yme-wh-Dkj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MV2-kN-5mL"/>
+                                        <exclude reference="UBA-u9-WMz"/>
+                                        <exclude reference="Yme-wh-Dkj"/>
+                                    </mask>
+                                </variation>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEF-mH-c2u">
                                 <rect key="frame" x="275" y="514" width="30" height="30"/>
                                 <constraints>
@@ -61,28 +105,6 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Brand:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="srN-6Z-vHp">
-                                <rect key="frame" x="16" y="504" width="45" height="23"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="1hg-WX-zi3"/>
-                                    <constraint firstAttribute="height" constant="23" id="75c-yH-VRX"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="D6g-6w-A9Z"/>
-                                    <constraint firstAttribute="height" constant="34" id="MV2-kN-5mL"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="UBA-u9-WMz"/>
-                                    <constraint firstAttribute="width" constant="261" id="Yme-wh-Dkj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="MV2-kN-5mL"/>
-                                        <exclude reference="UBA-u9-WMz"/>
-                                        <exclude reference="Yme-wh-Dkj"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Varietal:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="yht-IA-qvC">
                                 <rect key="frame" x="16" y="525" width="45" height="23"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
@@ -105,38 +127,16 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Chardonnay" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="8Ou-xH-Iln">
-                                <rect key="frame" x="62" y="525" width="204" height="23"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="KUN-4j-IBv"/>
-                                    <constraint firstAttribute="height" constant="34" id="Mxs-O9-8bT"/>
-                                    <constraint firstAttribute="height" constant="23" id="SJD-Zp-TUv"/>
-                                    <constraint firstAttribute="width" constant="261" id="qEY-TP-jnz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="KUN-4j-IBv"/>
-                                        <exclude reference="Mxs-O9-8bT"/>
-                                        <exclude reference="qEY-TP-jnz"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMv-gb-4q9" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="vbc-4t-g6a"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="vbc-4t-g6a"/>
-                                    </mask>
-                                </variation>
-                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CJf-6H-KdG">
+                                <rect key="frame" x="10" y="72" width="300" height="29"/>
+                                <segments>
+                                    <segment title="On Premise Locations"/>
+                                    <segment title="Off Premise Locations"/>
+                                </segments>
+                                <connections>
+                                    <action selector="premiseBarAction:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Ove-dg-FWx"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
