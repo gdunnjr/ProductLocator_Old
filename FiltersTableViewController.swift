@@ -84,7 +84,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("filterTableViewCellIdentifier") as FilterTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("filterTableViewCellIdentifier") as! FilterTableViewCell
         
         let filter = self.model!.filters[indexPath.section] as Filter
         switch filter.type {
@@ -271,7 +271,12 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
         }
     }
   
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
+    //func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
+    func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        #namespaceURI: String?,
+        #qualifiedName: String?,
+        attributes attributeDict: [NSObject : AnyObject]) {
         element = elementName
         
         if (elementName as NSString).isEqualToString("plBrandDetails")
@@ -309,7 +314,7 @@ class FiltersTableViewController: UITableViewController,UINavigationBarDelegate,
                 
                 self.model!.filters[1].options.removeAll(keepCapacity: false)
                 
-                let xmlParser = responseObject as NSXMLParser
+                let xmlParser = responseObject as! NSXMLParser
                 xmlParser.delegate = self
                 xmlParser.parse()
                 self.model!.filters[1].options[0].selected = true

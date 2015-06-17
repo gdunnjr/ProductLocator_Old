@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		640E78FDB4F24B57CE2AF0B6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D1030D66D39E152D1AE084 /* libPods.a */; };
 		B83829051ACD5CB000E0A290 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83829041ACD5CB000E0A290 /* Constants.swift */; };
-		B84A65D81AE8299A004CC36B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A65D71AE8299A004CC36B /* Crashlytics.framework */; };
 		B84E8CCE1AA66BBB007B9B91 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */; };
 		B86BD8F31AA0DEFB0033E64B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */; };
 		B86BD8F51AA0DEFB0033E64B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD8F41AA0DEFB0033E64B /* ViewController.swift */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		77D1030D66D39E152D1AE084 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83829041ACD5CB000E0A290 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B84A65D71AE8299A004CC36B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FiltersTableViewController.swift; path = ../FiltersTableViewController.swift; sourceTree = "<group>"; };
 		B86BD8ED1AA0DEFB0033E64B /* ProductLocator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductLocator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86BD8F11AA0DEFB0033E64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,7 +50,7 @@
 		B8B44A231AA0E30600E0B7F8 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		B8CF79FE1AA2247800795EB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		B8F831301AA27BA60080DA43 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		B8F831301AA27BA60080DA43 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CFE3E51A2EDDECBF829BFB12 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F05773C246CB633BF681038F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */,
-				B84A65D81AE8299A004CC36B /* Crashlytics.framework in Frameworks */,
 				640E78FDB4F24B57CE2AF0B6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,7 +118,6 @@
 		B86BD8EF1AA0DEFB0033E64B /* ProductLocator */ = {
 			isa = PBXGroup;
 			children = (
-				B84A65D71AE8299A004CC36B /* Crashlytics.framework */,
 				B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */,
 				B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */,
 				B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */,
@@ -173,7 +169,6 @@
 				B86BD8EA1AA0DEFB0033E64B /* Frameworks */,
 				B86BD8EB1AA0DEFB0033E64B /* Resources */,
 				880D6F50D98266883A3AE7C6 /* Copy Pods Resources */,
-				B84A65D61AE8232B004CC36B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,7 +208,7 @@
 				TargetAttributes = {
 					B86BD8EC1AA0DEFB0033E64B = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = W544NBYTGH;
+						DevelopmentTeam = 6JR6497T4E;
 					};
 					B86BD9011AA0DEFB0033E64B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -292,19 +287,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B84A65D61AE8232B004CC36B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "./Crashlytics.framework/run ad87b323e7785261ee3e333b499b665e0477e462 035b6cd61c7c05b9c6c2fd957a388e43a21a9e799f18c71246b6e90e19eac5c1";
-			shellScript = "";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -376,7 +358,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -419,7 +401,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -449,12 +431,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ProductLocator",
+					"$(PROJECT_DIR)/Pods/CrashlyticsFramework",
 				);
 				INFOPLIST_FILE = ProductLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee5ff13d-4179-4c3c-ac8f-3c6244576c24";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,12 +454,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ProductLocator",
+					"$(PROJECT_DIR)/Pods/CrashlyticsFramework",
 				);
 				INFOPLIST_FILE = ProductLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee5ff13d-4179-4c3c-ac8f-3c6244576c24";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = bridge.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

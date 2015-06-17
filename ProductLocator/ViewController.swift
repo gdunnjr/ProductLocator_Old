@@ -73,9 +73,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "modalFilterSegue"
         {
-            let navController = segue.destinationViewController as UINavigationController
+            let navController = segue.destinationViewController as! UINavigationController
             //let destVC = navController.viewControllers[0]  as FiltersTableViewController
-            let destVC = navController.topViewController as FiltersTableViewController
+            let destVC = navController.topViewController as! FiltersTableViewController
             
             destVC.delegate = self
         }
@@ -128,7 +128,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         else
                         {
                             for index in 0...prodLocs.count-1 {
-                                let currentStore = ((prodLocs[index]["storeName"]) as String)
+                                let currentStore = ((prodLocs[index]["storeName"]) as! String)
                                 if (currentStore != lastStore) {
                                     //println((prodLocs[index]["storeName"]) as String)
                                     //println((prodLocs[index]["latitude"]) as Float)
@@ -155,14 +155,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                                     
                                     let annotation = MKPointAnnotation()
                                     let coordinate = CLLocationCoordinate2D(latitude: storeLat, longitude: storeLng)
-                                    annotation.setCoordinate(coordinate)
+                                    annotation.coordinate = coordinate
                                     annotation.title = storeName
                                     annotation.subtitle = storeAddress + " " + storeCity
                                     //self.annotations.append(annotation)
                                     self.mapView.addAnnotation(annotation)
                                     
                                 }
-                                lastStore = ((prodLocs[index]["storeName"]) as String)
+                                lastStore = ((prodLocs[index]["storeName"]) as! String)
                             }
                         }
                     }
@@ -197,7 +197,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y: 5)
             
-            let directionButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+            let directionButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
             let directionIcon = UIImage(named: "113-navigation") as UIImage?
             directionButton.frame = CGRectMake(0, 0, 32, 32)
             directionButton.setImage(directionIcon, forState: UIControlState.Normal)
@@ -220,7 +220,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let location = locations.last as CLLocation
+        let location = locations.last as! CLLocation
         if location.horizontalAccuracy > 0 {
             self.latitude = location.coordinate.latitude
             self.longitude = location.coordinate.longitude
@@ -320,7 +320,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     @IBAction func premiseBarAction(sender: AnyObject) {
         
-        let barButton = sender as UISegmentedControl
+        let barButton = sender as! UISegmentedControl
         if barButton.selectedSegmentIndex == 1
         {
             premiseType = premise.OffPremise
@@ -348,7 +348,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapItem.name = targetDesc
         let launchOptions:NSDictionary = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
         var currentLocationMapItem:MKMapItem = MKMapItem.mapItemForCurrentLocation()
-        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions)
+        MKMapItem.openMapsWithItems([currentLocationMapItem, mapItem], launchOptions: launchOptions as [NSObject : AnyObject])
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
