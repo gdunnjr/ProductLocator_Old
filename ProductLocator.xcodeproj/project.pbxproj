@@ -16,11 +16,11 @@
 		B86BD8FA1AA0DEFB0033E64B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8F91AA0DEFB0033E64B /* Images.xcassets */; };
 		B86BD8FD1AA0DEFB0033E64B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86BD8FB1AA0DEFB0033E64B /* LaunchScreen.xib */; };
 		B86BD9091AA0DEFB0033E64B /* ProductLocatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */; };
+		B87B2F761B432742002C2268 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87B2F751B432742002C2268 /* GoogleMaps.framework */; };
+		B87B2F781B4327B5002C2268 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B87B2F771B4327B5002C2268 /* GoogleMaps.bundle */; };
 		B89914771AA787FC00DF08DE /* ProductLocatorFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */; };
 		B8BE27031AC5D88400195646 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */; };
 		B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CF79FE1AA2247800795EB7 /* MapKit.framework */; };
-		B8D7D2FD1B164EC8003C6B00 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D7D2FC1B164EC8003C6B00 /* GoogleMaps.framework */; };
-		B8D7D2FF1B164F93003C6B00 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B8D7D2FE1B164F93003C6B00 /* GoogleMaps.bundle */; };
 		B8D7D3011B164FD6003C6B00 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D7D3001B164FD6003C6B00 /* AVFoundation.framework */; };
 		B8D7D3031B164FE8003C6B00 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D7D3021B164FE8003C6B00 /* CoreData.framework */; };
 		B8D7D3051B164FEF003C6B00 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D7D3041B164FEF003C6B00 /* CoreLocation.framework */; };
@@ -60,12 +60,12 @@
 		B86BD9021AA0DEFB0033E64B /* ProductLocatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductLocatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86BD9071AA0DEFB0033E64B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86BD9081AA0DEFB0033E64B /* ProductLocatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLocatorTests.swift; sourceTree = "<group>"; };
+		B87B2F751B432742002C2268 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		B87B2F771B4327B5002C2268 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		B89914761AA787FC00DF08DE /* ProductLocatorFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductLocatorFilters.swift; sourceTree = "<group>"; };
 		B8B44A231AA0E30600E0B7F8 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		B8CF79FE1AA2247800795EB7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		B8D7D2FC1B164EC8003C6B00 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = "../../Downloads/GoogleMaps-iOS-1.9.2 2/GoogleMaps.framework"; sourceTree = "<group>"; };
-		B8D7D2FE1B164F93003C6B00 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "../../Downloads/GoogleMaps-iOS-1.9.2 2/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
 		B8D7D3001B164FD6003C6B00 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B8D7D3021B164FE8003C6B00 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B8D7D3041B164FEF003C6B00 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -91,6 +91,7 @@
 				B8D7D3171B165055003C6B00 /* SystemConfiguration.framework in Frameworks */,
 				B8D7D3151B16504A003C6B00 /* QuartzCore.framework in Frameworks */,
 				B8D7D3131B165042003C6B00 /* OpenGLES.framework in Frameworks */,
+				B87B2F761B432742002C2268 /* GoogleMaps.framework in Frameworks */,
 				B8D7D3111B16502C003C6B00 /* libz.dylib in Frameworks */,
 				B8D7D30F1B165021003C6B00 /* libicucore.dylib in Frameworks */,
 				B8D7D30D1B165015003C6B00 /* libc++.dylib in Frameworks */,
@@ -100,7 +101,6 @@
 				B8D7D3051B164FEF003C6B00 /* CoreLocation.framework in Frameworks */,
 				B8D7D3031B164FE8003C6B00 /* CoreData.framework in Frameworks */,
 				B8D7D3011B164FD6003C6B00 /* AVFoundation.framework in Frameworks */,
-				B8D7D2FD1B164EC8003C6B00 /* GoogleMaps.framework in Frameworks */,
 				B8CF79FF1AA2247800795EB7 /* MapKit.framework in Frameworks */,
 				640E78FDB4F24B57CE2AF0B6 /* libPods.a in Frameworks */,
 			);
@@ -171,8 +171,8 @@
 		B86BD8EF1AA0DEFB0033E64B /* ProductLocator */ = {
 			isa = PBXGroup;
 			children = (
-				B8D7D2FE1B164F93003C6B00 /* GoogleMaps.bundle */,
-				B8D7D2FC1B164EC8003C6B00 /* GoogleMaps.framework */,
+				B87B2F771B4327B5002C2268 /* GoogleMaps.bundle */,
+				B87B2F751B432742002C2268 /* GoogleMaps.framework */,
 				B84E8CCD1AA66BBB007B9B91 /* FiltersTableViewController.swift */,
 				B8BE27021AC5D88300195646 /* FilterTableViewCell.swift */,
 				B86BD8F21AA0DEFB0033E64B /* AppDelegate.swift */,
@@ -278,6 +278,39 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				en_GB,
+				es,
+				fi,
+				fr,
+				he,
+				hr,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				no,
+				pl,
+				pt,
+				pt_PT,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				tr,
+				uk,
+				vi,
+				zh_CN,
+				zh_TW,
 			);
 			mainGroup = B86BD8E41AA0DEFB0033E64B;
 			productRefGroup = B86BD8EE1AA0DEFB0033E64B /* Products */;
@@ -299,7 +332,7 @@
 				B86BD8F81AA0DEFB0033E64B /* Main.storyboard in Resources */,
 				B86BD8FD1AA0DEFB0033E64B /* LaunchScreen.xib in Resources */,
 				B86BD8FA1AA0DEFB0033E64B /* Images.xcassets in Resources */,
-				B8D7D2FF1B164F93003C6B00 /* GoogleMaps.bundle in Resources */,
+				B87B2F781B4327B5002C2268 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +522,8 @@
 					"$(PROJECT_DIR)/ProductLocator",
 					"/Users/geralddunn/Downloads/GoogleMaps-iOS-1.9.2",
 					2,
+					"$(PROJECT_DIR)/GoogleMaps-iOS-1.9.2",
+					"$(PROJECT_DIR)/GoogleMaps-iOS-1.9.2/GoogleMapsSDKDemos",
 				);
 				INFOPLIST_FILE = ProductLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -513,6 +548,8 @@
 					"$(PROJECT_DIR)/ProductLocator",
 					"/Users/geralddunn/Downloads/GoogleMaps-iOS-1.9.2",
 					2,
+					"$(PROJECT_DIR)/GoogleMaps-iOS-1.9.2",
+					"$(PROJECT_DIR)/GoogleMaps-iOS-1.9.2/GoogleMapsSDKDemos",
 				);
 				INFOPLIST_FILE = ProductLocator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
