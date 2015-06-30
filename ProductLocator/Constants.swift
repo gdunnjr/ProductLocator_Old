@@ -19,6 +19,7 @@ class Constants {
     
     struct APIConstants {
         static let APIKey = "productlocatorios"
+        static let APIKeyTest = "myKey"
     }
     
     struct ImageConstants {

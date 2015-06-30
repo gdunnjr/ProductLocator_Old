@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import AddressBook
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FiltersViewDelegate, GMSMapViewDelegate {
     
     //@IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var brandLabel: UILabel!
@@ -64,8 +64,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Get the current location
         self.requestLocation()
         
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 8.0)
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 13.0)
         viewMap.camera = camera
+        
+        viewMap.delegate = self
         
         locationManager.delegate = self
         // this is not supported in IOS 7, so check that that the selector exists
@@ -89,10 +91,41 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.annotations = []
     }
     
+    func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
+        println("In Will Move: ")
+    }
+    
+    func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition) {
+        println("In did change position: ")
+    }
+    
+    func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition) {
+        println("In camera idle: ")
+        
+        let center = position.target
+        self.latitude = center.latitude
+        self.longitude = center.longitude
+
+        getStores()
+        
+        var visibleRegion : GMSVisibleRegion = mapView.projection.visibleRegion()
+        var bounds = GMSCoordinateBounds(coordinate: visibleRegion.nearLeft, coordinate: visibleRegion.farRight)
+        
+        let northEast = bounds.northEast
+        let southWest = bounds.southWest
+        
+        println(northEast.latitude)  // maxLat
+        println(southWest.latitude)  // minLat
+        
+        println(northEast.longitude)  // maxLng
+        println(southWest.longitude)  // minLng
+        
+    }
+    
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
-            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 13.0)
             viewMap.settings.myLocationButton = true
             
             didFindMyLocation = true
@@ -122,6 +155,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         
+        
+        var visibleRegion : GMSVisibleRegion = viewMap.projection.visibleRegion()
+        var bounds = GMSCoordinateBounds(coordinate: visibleRegion.nearLeft, coordinate: visibleRegion.farRight)
+        
+        let northEast = bounds.northEast
+        let southWest = bounds.southWest
+        
+        let maxLat = northEast.latitude  // maxLat
+        let minLat = southWest.latitude  // minLat
+        
+        let maxLng = northEast.longitude  // maxLng
+        let minLng = southWest.longitude  // minLng
+        
         activityIndicator.frame = CGRectMake(100, 100, 100, 100);
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
@@ -130,7 +176,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //TODO replace with google map call
         //let loc : CLLocationCoordinate2D  = mapView.centerCoordinate
       
-        let baseURL = "https://api.cbrands.com/pl/productlocations.json?apiKey=\(Constants.APIConstants.APIKey)&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)&radiusInMiles=15&premiseTypeDesc=\(premiseType.filterDescription())&from=0&to=50"
+        let prodDomain = "https://api.cbrands.com/"
+        let testDomain = "http://cbi-api-pl-prototype.herokuapp.com/"
+        var baseURL = testDomain + "pl/productlocations.json?apiKey=\(Constants.APIConstants.APIKey)&stateRestriction=Y&latitude=\(self.latitude)&longitude=\(self.longitude)&radiusInMiles=15&from=0&to=200"
+        baseURL = baseURL + "&minLatitude=\(minLat)&maxLatitude=\(maxLat)&minLongitude=\(minLng)&maxLongitude=\(maxLng)&storeInfoOnly=Y"
+       // baseURL = baseURL + "&premiseTypeDesc=\(premiseType.filterDescription())"
+       // baseURL = baseURL + "&brandCode=\(brandCdFilter)&varietalCode=\(varietalCdFilter)"
+
+        println(baseURL)
         
         //println(self.latitude)
         //println(self.longitude)
@@ -163,6 +216,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         }
                         else
                         {
+                            self.viewMap.clear()
+                            
                             for index in 0...prodLocs.count-1 {
                                 let currentStore = ((prodLocs[index]["storeName"]) as String)
                                 if (currentStore != lastStore) {
@@ -295,7 +350,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             //TODO replace with google map call
             //self.mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
             
-            viewMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 11, bearing: 0, viewingAngle: 0)
+            viewMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 13, bearing: 0, viewingAngle: 0)
             
             self.latitude = center.latitude
             self.longitude = center.longitude
